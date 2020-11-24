@@ -23,7 +23,10 @@ struct ReminderListView: View {
                         Image(systemName: "plus.circle.fill")
                         Text("New Reminder")
                     }
-                }), trailing: EditButton()
+                }), trailing: Button(action: {}, label: {
+                    Text("Edit")
+                        .fontWeight(.regular)
+                })
             )
         }
         .sheet(isPresented: $newReminderViewIsPresented, content: {
