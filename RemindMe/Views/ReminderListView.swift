@@ -9,13 +9,18 @@ import SwiftUI
 
 struct ReminderListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: ReminderManagedObject.entity(), sortDescriptors: [
+        NSSortDescriptor(keyPath: \ReminderManagedObject.isCompleted, ascending: true),
+        NSSortDescriptor(keyPath: \ReminderManagedObject.name, ascending: true),
+    ], animation: .default) private var reminders: FetchedResults<ReminderManagedObject>
     @State private var newReminderViewIsPresented = false
-    
     
     var body: some View {
         NavigationView {
             List {
-                Text("RemindMe")
+                ForEach(reminders, id: \.id) { reminder in
+                    ReminderView(reminder: reminder)
+                }
             }
             .navigationTitle("RemindMe")
             .navigationBarItems(leading: Button(action: {

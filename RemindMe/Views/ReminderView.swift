@@ -12,11 +12,17 @@ struct ReminderView: View {
     let reminder: ReminderManagedObject
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(reminder.wrappedName)
-            // TODO: Red if due.
-            reminder.wrappedDate.map(Text.init)
+                .font(.body)
+            
+            
+            reminder.wrappedDate.map(Text.init)?
+                .font(.callout)
+                .foregroundColor(reminder.date! < Date() ? .red : .secondary)
             reminder.note.map(Text.init)
+                .font(.callout)
+                .foregroundColor(.secondary)
             // URL
             
         }
