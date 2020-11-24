@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ReminderListView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @State private var newReminderViewIsPresented = false
+    
     
     var body: some View {
         NavigationView {
@@ -30,7 +32,7 @@ struct ReminderListView: View {
             )
         }
         .sheet(isPresented: $newReminderViewIsPresented, content: {
-            NewReminderView()
+            NewReminderView().environment(\.managedObjectContext, managedObjectContext)
         })
     }
 }

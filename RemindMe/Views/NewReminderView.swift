@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct NewReminderView: View {
     @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.managedObjectContext) private var managedObjectContext
     
     @State private var title = "New Reminder"
     @State private var note = ""
@@ -39,7 +41,13 @@ struct NewReminderView: View {
                 Text("Cancel")
                     .fontWeight(.regular)
             }), trailing: Button(action: {
-                // TODO: Save to CoreData
+                ReminderManagedObject.save(
+                    reminderToSave: Reminder(
+                        name: title,
+                        date: date,
+                        note: note,
+                        url: url),
+                    inManagedObjectContext: managedObjectContext)
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Done")
