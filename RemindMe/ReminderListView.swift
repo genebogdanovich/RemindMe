@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct ReminderListView: View {
-    
+    @State private var newReminderViewIsPresented = false
     
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List {
+                Text("RemindMe")
+            }
+            .navigationTitle("RemindMe")
+            .navigationBarItems(leading: Button(action: {
+                    newReminderViewIsPresented.toggle()
+                }, label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("New Reminder")
+                    }
+                }), trailing: EditButton()
+            )
+        }
+        .sheet(isPresented: $newReminderViewIsPresented, content: {
+            NewReminderView()
+        })
     }
 }
 

@@ -19,6 +19,7 @@
 		73A12EC5256CD9280047BB10 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A12EC4256CD9280047BB10 /* Preview Assets.xcassets */; };
 		73A12EC8256CD9280047BB10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A12EC6256CD9280047BB10 /* LaunchScreen.storyboard */; };
 		73F40F1C256CEA5200C55AED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40F1B256CEA5200C55AED /* Constants.swift */; };
+		73F40F1F256CEC9E00C55AED /* NewReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40F1E256CEC9E00C55AED /* NewReminderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		73A12EC7256CD9280047BB10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73A12EC9256CD9280047BB10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73F40F1B256CEA5200C55AED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		73F40F1E256CEC9E00C55AED /* NewReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReminderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				73A12EBD256CD9250047BB10 /* SceneDelegate.swift */,
 				73A0654D256CDF0800BF5F95 /* RemindMe.xcdatamodeld */,
 				73A12EBF256CD9250047BB10 /* ReminderListView.swift */,
+				73F40F1E256CEC9E00C55AED /* NewReminderView.swift */,
 				73A06557256CE05100BF5F95 /* ReminderView.swift */,
 				73A12EC1256CD9280047BB10 /* Assets.xcassets */,
 				73A12EC6256CD9280047BB10 /* LaunchScreen.storyboard */,
@@ -170,6 +173,7 @@
 				73A12EC0256CD9250047BB10 /* ReminderListView.swift in Sources */,
 				73A06553256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift in Sources */,
 				73A06558256CE05100BF5F95 /* ReminderView.swift in Sources */,
+				73F40F1F256CEC9E00C55AED /* NewReminderView.swift in Sources */,
 				73A0654B256CDCBC00BF5F95 /* CoreDataStack.swift in Sources */,
 				73F40F1C256CEA5200C55AED /* Constants.swift in Sources */,
 			);
