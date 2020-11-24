@@ -10,6 +10,4 @@ import Foundation
 import CoreData
 
 @objc(ReminderManagedObject)
-public class ReminderManagedObject: NSManagedObject {
-
-}
+public class ReminderManagedObject: NSManagedObject {}

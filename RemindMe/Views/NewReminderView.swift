@@ -9,10 +9,11 @@ import SwiftUI
 import CoreData
 
 struct NewReminderView: View {
+    @ObservedObject var viewModel: NewReminderViewModel
     @Environment(\.presentationMode) private var presentationMode
     @Environment(\.managedObjectContext) private var managedObjectContext
     
-    @State private var title = "New Reminder"
+    @State private var name = "New Reminder"
     @State private var note = ""
     @State private var url = ""
     @State private var date = Date()
@@ -21,7 +22,7 @@ struct NewReminderView: View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Title", text: $title)
+                    TextField("Title", text: $name)
                     TextField("Notes", text: $note)
                     TextField("URL", text: $url)
                 }
@@ -41,25 +42,19 @@ struct NewReminderView: View {
                 Text("Cancel")
                     .fontWeight(.regular)
             }), trailing: Button(action: {
-                ReminderManagedObject.save(
-                    reminderToSave: Reminder(
-                        name: title,
-                        date: date,
-                        note: note,
-                        url: url),
-                    inManagedObjectContext: managedObjectContext)
+                viewModel.addNewReminder(date: date, name: name, note: note, url: URL(string: url))
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Done")
                     .fontWeight(.bold)
             })
-            .disabled(title.isEmpty))
+            .disabled(name.isEmpty))
         }
     }
 }
 
-struct NewReminderView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewReminderView()
-    }
-}
+//struct NewReminderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NewReminderView()
+//    }
+//}

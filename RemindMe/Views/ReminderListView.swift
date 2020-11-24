@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReminderListView: View {
+    @ObservedObject private var viewModel = ReminderListViewModel()
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: ReminderManagedObject.entity(), sortDescriptors: [
         NSSortDescriptor(keyPath: \ReminderManagedObject.isCompleted, ascending: true),
@@ -18,7 +19,7 @@ struct ReminderListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(reminders, id: \.id) { reminder in
+                ForEach(viewModel.reminders, id: \.id) { reminder in
                     ReminderView(reminder: reminder)
                 }
             }
@@ -36,8 +37,10 @@ struct ReminderListView: View {
                 })
             )
         }
-        .sheet(isPresented: $newReminderViewIsPresented, content: {
-            NewReminderView().environment(\.managedObjectContext, managedObjectContext)
+        .sheet(isPresented: $newReminderViewIsPresented, onDismiss: {
+            self.viewModel.fetchReminders()
+        }, content: {
+            NewReminderView(viewModel: NewReminderViewModel()).environment(\.managedObjectContext, managedObjectContext)
         })
     }
 }

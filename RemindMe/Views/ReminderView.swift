@@ -9,17 +9,16 @@ import SwiftUI
 import CoreData
 
 struct ReminderView: View {
-    let reminder: ReminderManagedObject
+    let reminder: Reminder
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(reminder.wrappedName)
+            Text(reminder.name)
                 .font(.body)
             
-            
-            reminder.wrappedDate.map(Text.init)?
+            Text("Some date here")
                 .font(.callout)
-                .foregroundColor(reminder.date! < Date() ? .red : .secondary)
+                .foregroundColor(reminder.date < Date() ? .red : .secondary)
             reminder.note.map(Text.init)
                 .font(.callout)
                 .foregroundColor(.secondary)
@@ -29,23 +28,23 @@ struct ReminderView: View {
     }
 }
 
-struct ReminderView_Previews: PreviewProvider {
-    static let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        
-        let reminder: ReminderManagedObject = {
-            let item = ReminderManagedObject(context: managedObjectContext)
-            item.id = UUID()
-            item.name = "Learn Swift"
-            item.date = Date()
-            item.note = "Use books and courses."
-            item.url = "apple.com"
-            item.isCompleted = false
-            return item
-        }()
-        
-        return NavigationView {
-            ReminderView(reminder: reminder)
-        }
-    }
-}
+//struct ReminderView_Previews: PreviewProvider {
+//    static let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+//    static var previews: some View {
+//        
+//        let reminder: ReminderManagedObject = {
+//            let item = ReminderManagedObject(context: managedObjectContext)
+//            item.id = UUID()
+//            item.name = "Learn Swift"
+//            item.date = Date()
+//            item.note = "Use books and courses."
+//            item.url = "apple.com"
+//            item.isCompleted = false
+//            return item
+//        }()
+//        
+//        return NavigationView {
+//            ReminderView(reminder: reminder)
+//        }
+//    }
+//}

@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		73A0654B256CDCBC00BF5F95 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0654A256CDCBC00BF5F95 /* CoreDataStack.swift */; };
+		7354E443256D18470069183F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E442256D18470069183F /* DataManager.swift */; };
+		7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E445256D1B420069183F /* ReminderListViewModel.swift */; };
+		7354E449256D1DB80069183F /* NewReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E448256D1DB80069183F /* NewReminderViewModel.swift */; };
+		7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44B256D1FA20069183F /* CoreDataHelper.swift */; };
+		7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44E256D1FCA0069183F /* DBHelper.swift */; };
 		73A0654F256CDF0800BF5F95 /* RemindMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73A0654D256CDF0800BF5F95 /* RemindMe.xcdatamodeld */; };
 		73A06553256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06551256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift */; };
 		73A06554256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06552256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift */; };
@@ -25,7 +29,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		73A0654A256CDCBC00BF5F95 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		7354E442256D18470069183F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		7354E445256D1B420069183F /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
+		7354E448256D1DB80069183F /* NewReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReminderViewModel.swift; sourceTree = "<group>"; };
+		7354E44B256D1FA20069183F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		7354E44E256D1FCA0069183F /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		73A0654E256CDF0800BF5F95 /* ReminderManagedObject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReminderManagedObject.xcdatamodel; sourceTree = "<group>"; };
 		73A06551256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		73A06552256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -55,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7354E452256D33A20069183F /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				7354E445256D1B420069183F /* ReminderListViewModel.swift */,
+				7354E448256D1DB80069183F /* NewReminderViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
 		73A12EAF256CD9250047BB10 = {
 			isa = PBXGroup;
 			children = (
@@ -77,9 +94,11 @@
 				73F40F24256CF54B00C55AED /* App */,
 				73F40F23256CF53300C55AED /* Models */,
 				73F40F22256CF52700C55AED /* Views */,
+				7354E452256D33A20069183F /* View Models */,
 				73F40F21256CF51A00C55AED /* Supporting Files */,
 				73A12EC9256CD9280047BB10 /* Info.plist */,
 				73A12EC3256CD9280047BB10 /* Preview Content */,
+				7354E442256D18470069183F /* DataManager.swift */,
 			);
 			path = RemindMe;
 			sourceTree = "<group>";
@@ -118,9 +137,10 @@
 				73A06551256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift */,
 				73A06552256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift */,
 				73A0654D256CDF0800BF5F95 /* RemindMe.xcdatamodeld */,
-				73A0654A256CDCBC00BF5F95 /* CoreDataStack.swift */,
 				73F40F25256CF5A600C55AED /* ReminderManagedObject+.swift */,
 				73F40F29256CF62100C55AED /* Reminder.swift */,
+				7354E44B256D1FA20069183F /* CoreDataHelper.swift */,
+				7354E44E256D1FCA0069183F /* DBHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,17 +224,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */,
 				73A06554256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift in Sources */,
 				73A12EBC256CD9250047BB10 /* AppDelegate.swift in Sources */,
+				7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */,
 				73A12EBE256CD9250047BB10 /* SceneDelegate.swift in Sources */,
 				73F40F2A256CF62100C55AED /* Reminder.swift in Sources */,
 				73A0654F256CDF0800BF5F95 /* RemindMe.xcdatamodeld in Sources */,
 				73A12EC0256CD9250047BB10 /* ReminderListView.swift in Sources */,
+				7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */,
 				73A06553256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift in Sources */,
 				73A06558256CE05100BF5F95 /* ReminderView.swift in Sources */,
+				7354E449256D1DB80069183F /* NewReminderViewModel.swift in Sources */,
 				73F40F1F256CEC9E00C55AED /* NewReminderView.swift in Sources */,
-				73A0654B256CDCBC00BF5F95 /* CoreDataStack.swift in Sources */,
 				73F40F1C256CEA5200C55AED /* Constants.swift in Sources */,
+				7354E443256D18470069183F /* DataManager.swift in Sources */,
 				73F40F26256CF5A600C55AED /* ReminderManagedObject+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
