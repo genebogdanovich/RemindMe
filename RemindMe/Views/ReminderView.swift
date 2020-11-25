@@ -24,7 +24,21 @@ struct ReminderView: View {
                 .foregroundColor(.gray)
             
             
-            
+            if reminder.urlString != nil {
+                Button(action: {
+                    reminder.openURL()
+                }, label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "safari")
+                        Text(reminder.urlString!)
+                    }
+                    .padding(5)
+                    .background(Color(UIColor.systemGray5))
+                    .cornerRadius(8)
+                    .font(.callout)
+                })
+                .buttonStyle(PlainButtonStyle())
+            }
         }
     }
 }

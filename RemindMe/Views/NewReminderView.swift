@@ -15,7 +15,7 @@ struct NewReminderView: View {
     
     @State private var name = "New Reminder"
     @State private var note = ""
-    @State private var url = ""
+    @State private var urlInputString = ""
     @State private var date = Date()
     
     var body: some View {
@@ -24,7 +24,10 @@ struct NewReminderView: View {
                 Section {
                     TextField("Title", text: $name)
                     TextField("Notes", text: $note)
-                    TextField("URL", text: $url)
+                    TextField("URL", text: $urlInputString)
+                        .textContentType(.URL)
+                        .keyboardType(.URL)
+                        .autocapitalization(.none)
                 }
                 
                 Section {
@@ -42,7 +45,9 @@ struct NewReminderView: View {
                 Text("Cancel")
                     .fontWeight(.regular)
             }), trailing: Button(action: {
-                viewModel.addNewReminder(date: date, name: name, note: note, url: URL(string: url))
+                
+                
+                viewModel.addNewReminder(date: date, name: name, note: note, urlString: urlInputString)
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Done")

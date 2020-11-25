@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 protocol ReminderListViewModelProtocol {
     var reminders: [ReminderViewModel] { get }
@@ -48,6 +49,10 @@ struct ReminderViewModel {
         return reminder.date
     }
     
+    var url: URL? {
+        return reminder.url
+    }
+    
     var name: String {
         return reminder.name
     }
@@ -56,8 +61,27 @@ struct ReminderViewModel {
         return reminder.note
     }
     
-    var url: String? {
-        return reminder.url?.absoluteString
+    /// String to display on the screen for the user.
+    var urlString: String? {
+        return reminder.url?.host
+    }
+    
+    /// Method to open URL in the user’s browser.
+    func openURL() {
+        guard let url = reminder.url else {
+            fatalError()
+            
+        }
+        UIApplication.shared.open(url, completionHandler: { success in
+            if success {
+                print("Successfully opened URL!")
+            } else {
+                
+                print("Something went wrong with URL.")
+            }
+            
+        })
+        
     }
     
 }
