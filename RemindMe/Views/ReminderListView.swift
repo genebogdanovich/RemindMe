@@ -17,7 +17,7 @@ struct ReminderListView: View {
         NavigationView {
             List {
                 ForEach(viewModel.reminders, id: \.id) { reminder in
-                    ReminderView(reminder: reminder)
+                    ReminderView(reminderViewModel: reminder, reminderListViewModel: viewModel)
                 }
                 .onDelete(perform: { indices in
                     viewModel.deleteReminders(at: indices)

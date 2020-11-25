@@ -32,10 +32,14 @@ class ReminderDataManager {
     
     /// Takes a Reminder object and fetches ReminderManagedObject from CoreData based on Reminder’s id.
     private func getReminderManagedObject(for reminder: Reminder) -> ReminderManagedObject? {
-        let predicate = NSPredicate(format: "uuid = %@", reminder.id as CVarArg)
+        
+        let predicate = NSPredicate(format: "id = %@", reminder.id as CVarArg)
+        
         let result = dbHelper.fetchFirst(ReminderManagedObject.self, predicate: predicate)
+        
         switch result {
         case .success(let reminderManagedObject):
+            
             return reminderManagedObject
         case .failure(_):
             return nil
@@ -73,6 +77,7 @@ extension ReminderDataManager: DataManager {
     
     func toggleIsCompleted(for reminder: Reminder) {
         guard let reminderManagedObject = getReminderManagedObject(for: reminder) else { return }
+        
         reminderManagedObject.isCompleted.toggle()
         dbHelper.update(reminderManagedObject)
     }

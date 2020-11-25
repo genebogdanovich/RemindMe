@@ -11,7 +11,7 @@ import CoreData
 extension ReminderManagedObject {
     func mapToReminder() -> Reminder {
         Reminder(
-            id: id ?? UUID(),
+            id: id,
             isCompleted: isCompleted,
             name: name ?? "New Reminder",
             date: date ?? Date(),

@@ -13,12 +13,12 @@ protocol ReminderListViewModelProtocol {
     var reminders: [ReminderViewModel] { get }
     var showCompleted: Bool { get set }
     func fetchReminders()
-    func toggleIsCompleted(for reminder: Reminder)
+    
 }
 
 final class ReminderListViewModel: ObservableObject {
     @Published var reminders = [ReminderViewModel]()
-    @Published var showCompleted = false {
+    @Published var showCompleted = true {
         didSet {
             fetchReminders()
         }
@@ -35,8 +35,13 @@ final class ReminderListViewModel: ObservableObject {
 struct ReminderViewModel {
     let reminder: Reminder
     
+    
     var id: UUID {
         return reminder.id
+    }
+    
+    var isCompleted: Bool {
+        return reminder.isCompleted
     }
     
     var dateString: String {
@@ -83,6 +88,8 @@ struct ReminderViewModel {
         })
         
     }
+    
+    
     
 }
 
