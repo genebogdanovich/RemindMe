@@ -42,4 +42,9 @@ extension ReminderListViewModel: ReminderListViewModelProtocol {
         dataManager.toggleIsCompleted(for: reminder)
         fetchReminders()
     }
+    
+    
+    func deleteReminders(at indices: IndexSet) {
+        dataManager.deleteReminders(at: indices)
+    }
 }

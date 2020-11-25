@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7342ACB9256E31B0007AF98F /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7342ACB8256E31B0007AF98F /* Collection+.swift */; };
 		7354E443256D18470069183F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E442256D18470069183F /* DataManager.swift */; };
 		7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E445256D1B420069183F /* ReminderListViewModel.swift */; };
 		7354E449256D1DB80069183F /* NewReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E448256D1DB80069183F /* NewReminderViewModel.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7342ACB8256E31B0007AF98F /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		7354E442256D18470069183F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7354E445256D1B420069183F /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
 		7354E448256D1DB80069183F /* NewReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReminderViewModel.swift; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7342ACB7256E319B007AF98F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7342ACB8256E31B0007AF98F /* Collection+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7354E452256D33A20069183F /* View Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		73A12EBA256CD9250047BB10 /* RemindMe */ = {
 			isa = PBXGroup;
 			children = (
+				7342ACB7256E319B007AF98F /* Extensions */,
 				73697AD1256E26CC007BD363 /* DataBase */,
 				73F40F24256CF54B00C55AED /* App */,
 				73F40F23256CF53300C55AED /* Models */,
@@ -235,6 +246,7 @@
 				7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */,
 				73A06554256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift in Sources */,
 				73A12EBC256CD9250047BB10 /* AppDelegate.swift in Sources */,
+				7342ACB9256E31B0007AF98F /* Collection+.swift in Sources */,
 				7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */,
 				73A12EBE256CD9250047BB10 /* SceneDelegate.swift in Sources */,
 				73F40F2A256CF62100C55AED /* Reminder.swift in Sources */,

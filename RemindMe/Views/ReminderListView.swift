@@ -19,6 +19,10 @@ struct ReminderListView: View {
                 ForEach(viewModel.reminders, id: \.id) { reminder in
                     ReminderView(reminder: reminder)
                 }
+                .onDelete(perform: { indices in
+                    viewModel.deleteReminders(at: indices)
+                    viewModel.fetchReminders()
+                })
             }
             .navigationTitle("RemindMe")
             .navigationBarItems(leading: Button(action: {
@@ -35,7 +39,7 @@ struct ReminderListView: View {
             )
         }
         .sheet(isPresented: $newReminderViewIsPresented, onDismiss: {
-            self.viewModel.fetchReminders()
+            viewModel.fetchReminders()
         }, content: {
             NewReminderView(viewModel: NewReminderViewModel())
         })

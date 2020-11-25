@@ -12,6 +12,7 @@ protocol DataManager {
     func fetchReminderList(includingCompleted: Bool) -> [Reminder]
     func addReminder(date: Date, name: String, note: String?, url: URL?)
     func toggleIsCompleted(for reminder: Reminder)
+    func deleteReminders(at indices: IndexSet)
 }
 
 extension DataManager {
@@ -44,6 +45,7 @@ class ReminderDataManager {
 
 // MARK: - DataManagerProtocol
 extension ReminderDataManager: DataManager {
+    
     func fetchReminderList(includingCompleted: Bool = false) -> [Reminder] {
         let predicate = includingCompleted ? nil : NSPredicate(format: "isCompleted == false")
         let result: Result<[ReminderManagedObject], Error> = dbHelper.fetch(ReminderManagedObject.self, predicate: predicate)
@@ -73,5 +75,20 @@ extension ReminderDataManager: DataManager {
         guard let reminderManagedObject = getReminderManagedObject(for: reminder) else { return }
         reminderManagedObject.isCompleted.toggle()
         dbHelper.update(reminderManagedObject)
+    }
+    
+    func deleteReminders(at indices: IndexSet) {
+        let result = dbHelper.fetch(ReminderManagedObject.self, atIndex: indices)
+        
+        switch result {
+        case .success(let reminderManagedObjectToDelete):
+            
+            dbHelper.delete(reminderManagedObjectToDelete!)
+            
+        case .failure(let error):
+            fatalError("\(#file), \(#function), \(error.localizedDescription)")
+        }
+        
+        
     }
 }

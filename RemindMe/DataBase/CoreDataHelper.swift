@@ -26,6 +26,16 @@ class CoreDataHelper: DBHelper {
         }
     }
     
+    func fetch<T: NSManagedObject>(_ objectType: T.Type, atIndex index: IndexSet) -> Result<T?, Error> {
+        let result = fetch(objectType)
+        switch result {
+        case .success(let items):
+            return .success(items[index.first!])
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+    
     func fetch<T: NSManagedObject>(_ objectType: T.Type, predicate: NSPredicate? = nil, limit: Int? = nil) -> Result<[T], Error> {
         let request = objectType.fetchRequest()
         request.predicate = predicate
@@ -41,11 +51,13 @@ class CoreDataHelper: DBHelper {
         }
     }
     
+    
+    
     func fetchFirst<T: NSManagedObject>(_ objectType: T.Type, predicate: NSPredicate?) -> Result<T?, Error> {
         let result = fetch(objectType, predicate: predicate, limit: 1)
         switch result {
         case .success(let items):
-            return .success(items.first as? T)
+            return .success(items.first)
         case .failure(let error):
             return .failure(error)
         }
@@ -60,7 +72,12 @@ class CoreDataHelper: DBHelper {
     }
     
     func delete(_ object: NSManagedObject) {
-        //
+        context.delete(object)
+        do {
+            try context.save()
+        } catch {
+            fatalError("\(#file), \(#function), \(error.localizedDescription)")
+        }
     }
     
     // MARK: - CoreData
