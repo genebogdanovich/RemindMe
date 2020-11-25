@@ -13,6 +13,7 @@ struct ReminderListView: View {
 
     @State private var newReminderViewIsPresented = false
     
+    
     var body: some View {
         NavigationView {
             List {
@@ -33,17 +34,25 @@ struct ReminderListView: View {
                         Image(systemName: "plus.circle.fill")
                         Text("New Reminder")
                     }
-                }), trailing: Button(action: {}, label: {
-                    Text("Edit")
-                        .fontWeight(.regular)
+                }), trailing: Menu {
+                    Button(action: {
+                        viewModel.showCompleted.toggle()
+                    }, label: {
+                        HStack {
+                            Text(viewModel.showCompleted ? "Hide Completed" : "Show Completed")
+                            Image(systemName: "eye")
+                        }
+                    })
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 })
-            )
         }
         .sheet(isPresented: $newReminderViewIsPresented, onDismiss: {
             viewModel.fetchReminders()
         }, content: {
             NewReminderView(viewModel: NewReminderViewModel())
         })
+        
     }
 }
 

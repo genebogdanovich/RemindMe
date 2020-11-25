@@ -18,7 +18,7 @@ protocol ReminderListViewModelProtocol {
 
 final class ReminderListViewModel: ObservableObject {
     @Published var reminders = [ReminderViewModel]()
-    @Published var showCompleted = true {
+    @Published var showCompleted = false {
         didSet {
             fetchReminders()
         }
