@@ -9,11 +9,8 @@ import SwiftUI
 
 struct ReminderListView: View {
     @ObservedObject private var viewModel = ReminderListViewModel()
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(entity: ReminderManagedObject.entity(), sortDescriptors: [
-        NSSortDescriptor(keyPath: \ReminderManagedObject.isCompleted, ascending: true),
-        NSSortDescriptor(keyPath: \ReminderManagedObject.name, ascending: true),
-    ], animation: .default) private var reminders: FetchedResults<ReminderManagedObject>
+    
+
     @State private var newReminderViewIsPresented = false
     
     var body: some View {
@@ -40,7 +37,7 @@ struct ReminderListView: View {
         .sheet(isPresented: $newReminderViewIsPresented, onDismiss: {
             self.viewModel.fetchReminders()
         }, content: {
-            NewReminderView(viewModel: NewReminderViewModel()).environment(\.managedObjectContext, managedObjectContext)
+            NewReminderView(viewModel: NewReminderViewModel())
         })
     }
 }

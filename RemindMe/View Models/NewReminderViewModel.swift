@@ -13,9 +13,9 @@ protocol NewReminderViewModelProtocol {
 }
 
 final class NewReminderViewModel: ObservableObject {
-    var dataManager: DataManagerProtocol
+    var dataManager: DataManager
     
-    init(dataManager: DataManagerProtocol = DataManager.shared) {
+    init(dataManager: DataManager = ReminderDataManager.shared) {
         self.dataManager = dataManager
     }
 }

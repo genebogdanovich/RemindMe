@@ -11,7 +11,7 @@ import CoreData
 struct NewReminderView: View {
     @ObservedObject var viewModel: NewReminderViewModel
     @Environment(\.presentationMode) private var presentationMode
-    @Environment(\.managedObjectContext) private var managedObjectContext
+    
     
     @State private var name = "New Reminder"
     @State private var note = ""

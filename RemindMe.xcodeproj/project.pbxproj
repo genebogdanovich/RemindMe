@@ -72,6 +72,16 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
+		73697AD1256E26CC007BD363 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				7354E44E256D1FCA0069183F /* DBHelper.swift */,
+				7354E442256D18470069183F /* DataManager.swift */,
+				7354E44B256D1FA20069183F /* CoreDataHelper.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
 		73A12EAF256CD9250047BB10 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		73A12EBA256CD9250047BB10 /* RemindMe */ = {
 			isa = PBXGroup;
 			children = (
+				73697AD1256E26CC007BD363 /* DataBase */,
 				73F40F24256CF54B00C55AED /* App */,
 				73F40F23256CF53300C55AED /* Models */,
 				73F40F22256CF52700C55AED /* Views */,
@@ -98,7 +109,6 @@
 				73F40F21256CF51A00C55AED /* Supporting Files */,
 				73A12EC9256CD9280047BB10 /* Info.plist */,
 				73A12EC3256CD9280047BB10 /* Preview Content */,
-				7354E442256D18470069183F /* DataManager.swift */,
 			);
 			path = RemindMe;
 			sourceTree = "<group>";
@@ -139,8 +149,6 @@
 				73A0654D256CDF0800BF5F95 /* RemindMe.xcdatamodeld */,
 				73F40F25256CF5A600C55AED /* ReminderManagedObject+.swift */,
 				73F40F29256CF62100C55AED /* Reminder.swift */,
-				7354E44B256D1FA20069183F /* CoreDataHelper.swift */,
-				7354E44E256D1FCA0069183F /* DBHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

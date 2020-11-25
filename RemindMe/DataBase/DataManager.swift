@@ -8,20 +8,20 @@
 import Foundation
 import CoreData
 
-protocol DataManagerProtocol {
+protocol DataManager {
     func fetchReminderList(includingCompleted: Bool) -> [Reminder]
     func addReminder(date: Date, name: String, note: String?, url: URL?)
     func toggleIsCompleted(for reminder: Reminder)
 }
 
-extension DataManagerProtocol {
+extension DataManager {
     func fetchReminderList(includingCompleted: Bool = false) -> [Reminder] {
         fetchReminderList(includingCompleted: includingCompleted)
     }
 }
 
-class DataManager {
-    static let shared: DataManagerProtocol = DataManager()
+class ReminderDataManager {
+    static let shared: DataManager = ReminderDataManager()
     
     var dbHelper: CoreDataHelper = CoreDataHelper.shared
     
@@ -29,6 +29,7 @@ class DataManager {
     
     private init() {}
     
+    /// Takes a Reminder object and fetches ReminderManagedObject from CoreData based on Reminder’s id.
     private func getReminderManagedObject(for reminder: Reminder) -> ReminderManagedObject? {
         let predicate = NSPredicate(format: "uuid = %@", reminder.id as CVarArg)
         let result = dbHelper.fetchFirst(ReminderManagedObject.self, predicate: predicate)
@@ -42,12 +43,13 @@ class DataManager {
 }
 
 // MARK: - DataManagerProtocol
-extension DataManager: DataManagerProtocol {
+extension ReminderDataManager: DataManager {
     func fetchReminderList(includingCompleted: Bool = false) -> [Reminder] {
         let predicate = includingCompleted ? nil : NSPredicate(format: "isCompleted == false")
         let result: Result<[ReminderManagedObject], Error> = dbHelper.fetch(ReminderManagedObject.self, predicate: predicate)
         switch result {
         case .success(let reminderManagedObject):
+            // Here we map our ReminderManagedObjects to Reminder type and return it. Genius!
             return reminderManagedObject.map { $0.mapToReminder() }
         case .failure(let error):
             fatalError("\(#file), \(#function), \(error.localizedDescription)")
@@ -64,7 +66,7 @@ extension DataManager: DataManagerProtocol {
         newReminder.note = note
         newReminder.url = url
         newReminder.isCompleted = false
-        dbHelper.create(newReminder)
+        dbHelper.create(newReminder) // All this does is it saves our ManagedObjectContext.
     }
     
     func toggleIsCompleted(for reminder: Reminder) {
