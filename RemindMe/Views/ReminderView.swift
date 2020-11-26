@@ -54,13 +54,14 @@ struct ReminderView: View {
     }
 }
 
-//struct ReminderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReminderView(reminderViewModel: ReminderViewModel(
-//                        reminder: Reminder(
-//                            name: "Grab a coffee",
-//                            date: Date(),
-//                            note: "It wakes you up in the morning.",
-//                            url: URL(string: "starbucks.com"))))
-//    }
-//}
+struct ReminderView_Previews: PreviewProvider {
+    static var previews: some View {
+        ReminderView(
+            reminderViewModel: ReminderViewModel(
+                reminder: Reminder(name: "Go for a walk",
+                                   date: Date(),
+                                   note: "It helps with problem solving.",
+                                   url: URL(string: "apple.com"))),
+            reminderListViewModel: ReminderListViewModel())
+    }
+}

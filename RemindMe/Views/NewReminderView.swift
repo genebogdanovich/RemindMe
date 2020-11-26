@@ -58,8 +58,8 @@ struct NewReminderView: View {
     }
 }
 
-//struct NewReminderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NewReminderView()
-//    }
-//}
+struct NewReminderView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewReminderView(viewModel: NewReminderViewModel())
+    }
+}
