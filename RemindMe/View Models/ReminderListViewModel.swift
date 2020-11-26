@@ -45,9 +45,7 @@ struct ReminderViewModel {
     }
     
     var dateString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = Constants.Formatting.fullDateFormat
-        return formatter.string(from: reminder.date)
+        return format(date: date)
     }
     
     var date: Date {
@@ -87,6 +85,30 @@ struct ReminderViewModel {
             
         })
         
+    }
+    
+    private func format(date: Date) -> String {
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        
+        if calendar.isDateInToday(date) {
+            formatter.dateFormat = Constants.Formatting.timeFormat
+            return "Today, \(formatter.string(from: date))"
+        }
+        
+        if calendar.isDateInYesterday(date) {
+            formatter.dateFormat = Constants.Formatting.timeFormat
+            return "Yesterday, \(formatter.string(from: date))"
+        }
+        
+        if calendar.isDateInTomorrow(date) {
+            formatter.dateFormat = Constants.Formatting.timeFormat
+            return "Tomorrow, \(formatter.string(from: date))"
+        }
+        
+        formatter.dateFormat = Constants.Formatting.fullDateFormat
+        
+        return formatter.string(from: date)
     }
     
     

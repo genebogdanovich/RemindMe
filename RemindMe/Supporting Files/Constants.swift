@@ -9,7 +9,8 @@ import Foundation
 
 struct Constants {
     struct Formatting {
-        static let fullDateFormat = "MM/dd/yyyy, h:mm a"
+        static let fullDateFormat = "MM.dd.yyyy, h:mm a"
+        static let timeFormat = "h:mm a"
         
     }
 }
