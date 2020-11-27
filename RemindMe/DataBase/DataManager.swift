@@ -64,6 +64,8 @@ extension ReminderDataManager: DataManager {
     
     
     func addReminder(date: Date, name: String, note: String?, url: URL?) {
+        
+        
         let entity = ReminderManagedObject.entity()
         let newReminder = ReminderManagedObject(entity: entity, insertInto: dbHelper.context)
         newReminder.id = UUID()

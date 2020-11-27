@@ -11,8 +11,7 @@ import CoreData
 struct NewReminderView: View {
     @ObservedObject var viewModel: NewReminderViewModel
     @Environment(\.presentationMode) private var presentationMode
-    
-    
+
     @State private var name = "New Reminder"
     @State private var note = ""
     @State private var urlInputString = ""
