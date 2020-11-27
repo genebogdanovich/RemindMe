@@ -10,7 +10,7 @@ import CoreData
 
 protocol DataManager {
     func fetchReminderList(includingCompleted: Bool) -> [Reminder]
-    func addReminder(date: Date, name: String, note: String?, url: URL?)
+    func add(_ reminder: Reminder)
     func toggleIsCompleted(for reminder: Reminder)
     func deleteReminders(at indices: IndexSet)
 }
@@ -32,14 +32,10 @@ class ReminderDataManager {
     
     /// Takes a Reminder object and fetches ReminderManagedObject from CoreData based on Reminder’s id.
     private func getReminderManagedObject(for reminder: Reminder) -> ReminderManagedObject? {
-        
         let predicate = NSPredicate(format: "id = %@", reminder.id as CVarArg)
-        
         let result = dbHelper.fetchFirst(ReminderManagedObject.self, predicate: predicate)
-        
         switch result {
         case .success(let reminderManagedObject):
-            
             return reminderManagedObject
         case .failure(_):
             return nil
@@ -62,18 +58,26 @@ extension ReminderDataManager: DataManager {
         }
     }
     
-    
-    func addReminder(date: Date, name: String, note: String?, url: URL?) {
+    func add(_ reminder: Reminder) {
+        // First we check if we already have that reminder. If we do, we update it.
+        if let existingReminder = getReminderManagedObject(for: reminder) {
+            existingReminder.date = reminder.date
+            existingReminder.name = reminder.name
+            existingReminder.note = reminder.note
+            existingReminder.url = reminder.url
+            dbHelper.update(existingReminder)
+            return
+        }
         
-        
+        // If the reminder doesn’t exist, create it!
         let entity = ReminderManagedObject.entity()
         let newReminder = ReminderManagedObject(entity: entity, insertInto: dbHelper.context)
-        newReminder.id = UUID()
-        newReminder.name = name
-        newReminder.date = date
-        newReminder.note = note
-        newReminder.url = url
-        newReminder.isCompleted = false
+        newReminder.id = reminder.id
+        newReminder.name = reminder.name
+        newReminder.date = reminder.date
+        newReminder.note = reminder.note
+        newReminder.url = reminder.url
+        newReminder.isCompleted = reminder.isCompleted
         dbHelper.create(newReminder) // All this does is it saves our ManagedObjectContext.
     }
     

@@ -15,7 +15,7 @@ struct Reminder: Identifiable, Hashable {
     var note: String?
     var url: URL?
     
-    init(id: UUID = UUID(), isCompleted: Bool = false, name: String, date: Date, note: String?, url: URL?) {
+    init(id: UUID, isCompleted: Bool, name: String, date: Date, note: String?, url: URL?) {
         self.id = id
         self.date = date
         self.isCompleted = isCompleted

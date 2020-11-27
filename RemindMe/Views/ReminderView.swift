@@ -11,6 +11,7 @@ import CoreData
 struct ReminderView: View {
     let reminderViewModel: ReminderViewModel
     let reminderListViewModel: ReminderListViewModel
+    @State private var updateReminderViewIsPresented = false
     
     
     var body: some View {
@@ -22,8 +23,18 @@ struct ReminderView: View {
                 }
             
             VStack(alignment: .leading) {
-                Text(reminderViewModel.name)
-                    .font(.body)
+                
+                Button(action: {
+                    updateReminderViewIsPresented.toggle()
+                }, label: {
+                    Text(reminderViewModel.name)
+                        .font(.body)
+                })
+                .buttonStyle(PlainButtonStyle())
+                
+                
+                
+                
                 Text(reminderViewModel.dateString)
                     .font(.callout)
                     // FIXME: There has to be a better way with Combine.
@@ -51,6 +62,11 @@ struct ReminderView: View {
             }
             
         }
+        .sheet(isPresented: $updateReminderViewIsPresented, onDismiss: {
+            reminderListViewModel.fetchReminders()
+        }, content: {
+            UpdateReminderView(reminderToUpdate: reminderViewModel.reminder)
+        })
     }
 }
 
@@ -58,10 +74,14 @@ struct ReminderView_Previews: PreviewProvider {
     static var previews: some View {
         ReminderView(
             reminderViewModel: ReminderViewModel(
-                reminder: Reminder(name: "Go for a walk",
-                                   date: Date(),
-                                   note: "It helps with problem solving.",
-                                   url: URL(string: "apple.com"))),
+                reminder: Reminder(
+                    id: UUID(),
+                    isCompleted: false,
+                    name: "Go for a walk",
+                    date: Date(),
+                    note: "It helps with problem solving.",
+                    url: URL(string: "apple.com"))
+            ),
             reminderListViewModel: ReminderListViewModel())
     }
 }

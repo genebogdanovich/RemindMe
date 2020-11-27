@@ -1,21 +1,21 @@
 //
-//  NewReminderView.swift
+//  UpdateReminderView.swift
 //  RemindMe
 //
-//  Created by Gene Bogdanovich on 24.11.20.
+//  Created by Gene Bogdanovich on 27.11.20.
 //
 
 import SwiftUI
-import CoreData
 
-struct NewReminderView: View {
-    @ObservedObject var viewModel: NewReminderViewModel
+struct UpdateReminderView: View {
     @Environment(\.presentationMode) private var presentationMode
-
-    @State private var name = "New Reminder"
-    @State private var note = ""
-    @State private var urlInputString = ""
+    var viewModel: NewReminderViewModel
+    let reminderToUpdate: Reminder
+    @State private var name = ""
+    @State private var note: String = ""
+    @State private var urlInputString: String = ""
     @State private var date = Date()
+    
     
     var body: some View {
         NavigationView {
@@ -36,7 +36,7 @@ struct NewReminderView: View {
                 }
             }
             
-            .navigationTitle("New Reminder")
+            .navigationTitle("Edit Reminder")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()
@@ -44,16 +44,15 @@ struct NewReminderView: View {
                 Text("Cancel")
                     .fontWeight(.regular)
             }), trailing: Button(action: {
-                print(urlInputString)
+                
                 viewModel.addNew(
                     Reminder(
-                        id: UUID(),
+                        id: reminderToUpdate.id,
                         isCompleted: false,
                         name: name,
                         date: date,
                         note: note,
-                        url: urlInputString.makeUrl()
-                    )
+                        url: urlInputString.makeUrl())
                 )
                 presentationMode.wrappedValue.dismiss()
             }, label: {
@@ -62,12 +61,23 @@ struct NewReminderView: View {
             })
             .disabled(name.isEmpty))
         }
+        // FIXME: There must be a better way.
+        .onAppear() {
+            name = reminderToUpdate.name
+            note = reminderToUpdate.note ?? ""
+            urlInputString = reminderToUpdate.url?.host ?? ""
+            date = reminderToUpdate.date
+        }
+    }
+    
+    init(reminderToUpdate: Reminder) {
+        self.reminderToUpdate = reminderToUpdate
+        viewModel = NewReminderViewModel()
     }
 }
 
-struct NewReminderView_Previews: PreviewProvider {
+struct UpdateReminderView_Previews: PreviewProvider {
     static var previews: some View {
-        NewReminderView(viewModel: NewReminderViewModel())
+        UpdateReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Just do it", date: Date(), note: "Right now", url: URL(string: "apple.com")))
     }
 }
-

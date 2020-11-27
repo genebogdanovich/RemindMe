@@ -12,7 +12,6 @@ extension Collection where Element == ReminderManagedObject, Index == Int {
     func delete(at indices: IndexSet, inManagedObjectContext managedObjectContext: NSManagedObjectContext) {
         indices.forEach { index in
             managedObjectContext.delete(self[index])
-            
         }
         do {
             try managedObjectContext.save()
