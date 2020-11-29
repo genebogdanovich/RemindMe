@@ -26,7 +26,7 @@ struct ReminderListView: View {
                 })
             }
             
-            .navigationTitle("RemindMe")
+            .navigationTitle("Reminders")
             .navigationBarItems(leading: Button(action: {
                     newReminderViewIsPresented.toggle()
                 }, label: {
