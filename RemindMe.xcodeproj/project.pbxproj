@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		730807062570DAE800DCEC59 /* UpdateReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730807052570DAE800DCEC59 /* UpdateReminderView.swift */; };
 		730807092570EFBB00DCEC59 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730807082570EFBB00DCEC59 /* String+.swift */; };
 		7342ACB9256E31B0007AF98F /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7342ACB8256E31B0007AF98F /* Collection+.swift */; };
 		7354E443256D18470069183F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E442256D18470069183F /* DataManager.swift */; };
 		7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E445256D1B420069183F /* ReminderListViewModel.swift */; };
-		7354E449256D1DB80069183F /* NewReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E448256D1DB80069183F /* NewReminderViewModel.swift */; };
+		7354E449256D1DB80069183F /* DetailReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E448256D1DB80069183F /* DetailReminderViewModel.swift */; };
 		7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44B256D1FA20069183F /* CoreDataHelper.swift */; };
 		7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44E256D1FCA0069183F /* DBHelper.swift */; };
+		7367DA3E2573ED3E0029B47B /* DetailReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */; };
 		73A0654F256CDF0800BF5F95 /* RemindMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73A0654D256CDF0800BF5F95 /* RemindMe.xcdatamodeld */; };
 		73A06553256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06551256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift */; };
 		73A06554256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06552256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift */; };
@@ -26,20 +26,19 @@
 		73A12EC5256CD9280047BB10 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A12EC4256CD9280047BB10 /* Preview Assets.xcassets */; };
 		73A12EC8256CD9280047BB10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A12EC6256CD9280047BB10 /* LaunchScreen.storyboard */; };
 		73F40F1C256CEA5200C55AED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40F1B256CEA5200C55AED /* Constants.swift */; };
-		73F40F1F256CEC9E00C55AED /* NewReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40F1E256CEC9E00C55AED /* NewReminderView.swift */; };
 		73F40F26256CF5A600C55AED /* ReminderManagedObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40F25256CF5A600C55AED /* ReminderManagedObject+.swift */; };
 		73F40F2A256CF62100C55AED /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40F29256CF62100C55AED /* Reminder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		730807052570DAE800DCEC59 /* UpdateReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateReminderView.swift; sourceTree = "<group>"; };
 		730807082570EFBB00DCEC59 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		7342ACB8256E31B0007AF98F /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		7354E442256D18470069183F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7354E445256D1B420069183F /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
-		7354E448256D1DB80069183F /* NewReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReminderViewModel.swift; sourceTree = "<group>"; };
+		7354E448256D1DB80069183F /* DetailReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReminderViewModel.swift; sourceTree = "<group>"; };
 		7354E44B256D1FA20069183F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		7354E44E256D1FCA0069183F /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReminderView.swift; sourceTree = "<group>"; };
 		73A0654E256CDF0800BF5F95 /* ReminderManagedObject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReminderManagedObject.xcdatamodel; sourceTree = "<group>"; };
 		73A06551256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		73A06552256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -53,7 +52,6 @@
 		73A12EC7256CD9280047BB10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73A12EC9256CD9280047BB10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73F40F1B256CEA5200C55AED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		73F40F1E256CEC9E00C55AED /* NewReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReminderView.swift; sourceTree = "<group>"; };
 		73F40F25256CF5A600C55AED /* ReminderManagedObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderManagedObject+.swift"; sourceTree = "<group>"; };
 		73F40F29256CF62100C55AED /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				7354E445256D1B420069183F /* ReminderListViewModel.swift */,
-				7354E448256D1DB80069183F /* NewReminderViewModel.swift */,
+				7354E448256D1DB80069183F /* DetailReminderViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -151,9 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				73A12EBF256CD9250047BB10 /* ReminderListView.swift */,
-				73F40F1E256CEC9E00C55AED /* NewReminderView.swift */,
 				73A06557256CE05100BF5F95 /* ReminderView.swift */,
-				730807052570DAE800DCEC59 /* UpdateReminderView.swift */,
+				7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,7 +249,6 @@
 				7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */,
 				73A06554256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift in Sources */,
 				73A12EBC256CD9250047BB10 /* AppDelegate.swift in Sources */,
-				730807062570DAE800DCEC59 /* UpdateReminderView.swift in Sources */,
 				7342ACB9256E31B0007AF98F /* Collection+.swift in Sources */,
 				730807092570EFBB00DCEC59 /* String+.swift in Sources */,
 				7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */,
@@ -263,8 +259,8 @@
 				7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */,
 				73A06553256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift in Sources */,
 				73A06558256CE05100BF5F95 /* ReminderView.swift in Sources */,
-				7354E449256D1DB80069183F /* NewReminderViewModel.swift in Sources */,
-				73F40F1F256CEC9E00C55AED /* NewReminderView.swift in Sources */,
+				7354E449256D1DB80069183F /* DetailReminderViewModel.swift in Sources */,
+				7367DA3E2573ED3E0029B47B /* DetailReminderView.swift in Sources */,
 				73F40F1C256CEA5200C55AED /* Constants.swift in Sources */,
 				7354E443256D18470069183F /* DataManager.swift in Sources */,
 				73F40F26256CF5A600C55AED /* ReminderManagedObject+.swift in Sources */,

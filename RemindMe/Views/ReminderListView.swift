@@ -50,9 +50,8 @@ struct ReminderListView: View {
         .sheet(isPresented: $newReminderViewIsPresented, onDismiss: {
             viewModel.fetchReminders()
         }, content: {
-            NewReminderView(viewModel: NewReminderViewModel())
+            DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: nil)
         })
-        
     }
 }
 

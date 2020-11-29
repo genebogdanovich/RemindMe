@@ -1,5 +1,5 @@
 //
-//  NewReminderViewModel.swift
+//  DetailReminderViewModel.swift
 //  RemindMe
 //
 //  Created by Gene Bogdanovich on 24.11.20.
@@ -7,8 +7,9 @@
 
 import Foundation
 import Combine
+import UserNotifications
 
-protocol NewReminderViewModelProtocol {
+protocol DetailReminderViewModelProtocol {
     func addNew(_ reminder: Reminder)
 }
 
@@ -19,7 +20,7 @@ protocol NewReminderViewModelProtocol {
 //    var urlString = ""
 //}
 
-final class NewReminderViewModel: ObservableObject {
+final class DetailReminderViewModel: ObservableObject {
     var dataManager: DataManager
 //    var newReminderViewState = NewReminderViewState()
     
@@ -31,7 +32,7 @@ final class NewReminderViewModel: ObservableObject {
 
 // MARK: - NewReminderViewModelProtocol
 
-extension NewReminderViewModel: NewReminderViewModelProtocol {
+extension DetailReminderViewModel: DetailReminderViewModelProtocol {
     func addNew(_ reminder: Reminder) {
         
 

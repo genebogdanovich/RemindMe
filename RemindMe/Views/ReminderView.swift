@@ -36,9 +36,13 @@ struct ReminderView: View {
                 
                 
                 Text(reminderViewModel.dateString)
+                    
                     .font(.callout)
                     // FIXME: There has to be a better way with Combine.
                     .foregroundColor(reminderViewModel.date < Date() ? .red : .gray)
+                    
+                
+                
                 reminderViewModel.note.map(Text.init)?
                     .font(.callout)
                     .foregroundColor(.gray)
@@ -65,7 +69,7 @@ struct ReminderView: View {
         .sheet(isPresented: $updateReminderViewIsPresented, onDismiss: {
             reminderListViewModel.fetchReminders()
         }, content: {
-            UpdateReminderView(reminderToUpdate: reminderViewModel.reminder)
+            DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: reminderViewModel.reminder)
         })
     }
 }
