@@ -53,14 +53,7 @@ struct ReminderView: View {
                     Button(action: {
                         reminderViewModel.openURL()
                     }, label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "safari")
-                            Text(reminderViewModel.urlString!.lowercased())
-                        }
-                        .padding(5)
-                        .background(Color(UIColor.systemGray5))
-                        .cornerRadius(8)
-                        .font(.callout)
+                        URLView(url: reminderViewModel.urlString!.lowercased())
                     })
                     .buttonStyle(PlainButtonStyle())
                 }
@@ -72,8 +65,26 @@ struct ReminderView: View {
         }, content: {
             DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: reminderViewModel.reminder)
         })
+        
     }
 }
+
+
+struct URLView: View {
+    let url: String
+    
+    var body: some View {
+        HStack(spacing: 4) {
+            Image(systemName: "safari")
+            Text(url)
+        }
+        .padding(5)
+        .background(Color(UIColor.systemGray5))
+        .cornerRadius(8)
+        .font(.callout)
+    }
+}
+
 
 struct ReminderView_Previews: PreviewProvider {
     static var previews: some View {
