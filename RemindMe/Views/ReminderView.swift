@@ -12,7 +12,11 @@ struct ReminderView: View {
     let reminderViewModel: ReminderViewModel
     let reminderListViewModel: ReminderListViewModel
     @State private var updateReminderViewIsPresented = false
-    
+    @State private var colorOfDateLabel = Color.gray
+    let timer = Timer
+        .publish(every: 1, on: .main, in: .common)
+        .autoconnect()
+        .eraseToAnyPublisher()
     
     var body: some View {
         HStack(alignment: .top) {
@@ -33,15 +37,12 @@ struct ReminderView: View {
                 })
                 .buttonStyle(PlainButtonStyle())
                 
-                
-                
-                
                 Text(reminderViewModel.dateString)
                     
                     .font(.callout)
-                    // FIXME: There has to be a better way with Combine.
-                    .foregroundColor(reminderViewModel.date < Date() ? .red : .gray)
-                    
+                    .foregroundColor(colorOfDateLabel)
+                    .onAppear(perform: updateColorOfDateLabel)
+                    .onReceive(timer, perform: { _ in updateColorOfDateLabel() })
                 
                 
                 reminderViewModel.note.map(Text.init)?
@@ -66,6 +67,14 @@ struct ReminderView: View {
             DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: reminderViewModel.reminder)
         })
         
+    }
+    
+    private func updateColorOfDateLabel() {
+        if Date() > reminderViewModel.date {
+            colorOfDateLabel = .red
+        } else {
+            colorOfDateLabel = .gray
+        }
     }
 }
 
