@@ -16,8 +16,9 @@ struct ReminderView: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            Image(systemName: reminderViewModel.isCompleted ? "checkmark.circle.fill" : "circle")
+            Image(systemName: reminderViewModel.isCompleted ? "checkmark.square.fill" : "square")
                 .font(.headline)
+                .foregroundColor(reminderViewModel.isCompleted ? .blue : .secondary)
                 .onTapGesture {
                     reminderListViewModel.toggleIsCompleted(for: reminderViewModel.reminder)
                 }
@@ -54,7 +55,7 @@ struct ReminderView: View {
                     }, label: {
                         HStack(spacing: 4) {
                             Image(systemName: "safari")
-                            Text(reminderViewModel.urlString!)
+                            Text(reminderViewModel.urlString!.lowercased())
                         }
                         .padding(5)
                         .background(Color(UIColor.systemGray5))

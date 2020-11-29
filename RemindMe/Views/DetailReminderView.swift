@@ -25,6 +25,11 @@ struct DetailReminderView: View {
             Form {
                 Section {
                     TextField("Title", text: $name)
+                        .onTapGesture {
+                            if reminderToUpdate == nil {
+                                name = ""
+                            }
+                        }
                     TextField("Notes", text: $note)
                     TextField("URL", text: $urlInputString)
                         .textContentType(.URL)
