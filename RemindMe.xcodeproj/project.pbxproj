@@ -85,14 +85,14 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
-		73697AD1256E26CC007BD363 /* DataBase */ = {
+		73697AD1256E26CC007BD363 /* Database */ = {
 			isa = PBXGroup;
 			children = (
 				7354E44E256D1FCA0069183F /* DBHelper.swift */,
 				7354E442256D18470069183F /* DataManager.swift */,
 				7354E44B256D1FA20069183F /* CoreDataHelper.swift */,
 			);
-			path = DataBase;
+			path = Database;
 			sourceTree = "<group>";
 		};
 		73A12EAF256CD9250047BB10 = {
@@ -115,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				7342ACB7256E319B007AF98F /* Extensions */,
-				73697AD1256E26CC007BD363 /* DataBase */,
+				73697AD1256E26CC007BD363 /* Database */,
 				73F40F24256CF54B00C55AED /* App */,
 				73F40F23256CF53300C55AED /* Models */,
 				73F40F22256CF52700C55AED /* Views */,
