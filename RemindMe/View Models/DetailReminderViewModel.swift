@@ -45,7 +45,8 @@ extension DetailReminderViewModel: DetailReminderViewModelProtocol {
                             name: reminder.name,
                             date: reminder.date,
                             note: reminder.note,
-                            url: reminder.url))
+                            url: reminder.url,
+                            image: reminder.image))
         
     }
     

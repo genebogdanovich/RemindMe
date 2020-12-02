@@ -21,6 +21,7 @@ extension ReminderManagedObject {
     @NSManaged public var isCompleted: Bool
     @NSManaged public var note: String?
     @NSManaged public var url: URL?
+    @NSManaged public var imageData: Data?
 }
 
 extension ReminderManagedObject: Identifiable {}

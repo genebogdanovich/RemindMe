@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UIKit
+import SwiftUI
 
 protocol ReminderListViewModelProtocol {
     var reminders: [ReminderViewModel] { get }
@@ -35,6 +36,12 @@ final class ReminderListViewModel: ObservableObject {
 struct ReminderViewModel {
     let reminder: Reminder
     
+    var image: Image? {
+        if let uiImage = reminder.image {
+            return Image(uiImage: uiImage)
+        }
+        return nil
+    }
     
     var id: UUID {
         return reminder.id

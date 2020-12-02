@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Reminder: Identifiable, Hashable {
     let id: UUID
@@ -14,13 +15,15 @@ struct Reminder: Identifiable, Hashable {
     var name: String
     var note: String?
     var url: URL?
+    var image: UIImage?
     
-    init(id: UUID, isCompleted: Bool, name: String, date: Date, note: String?, url: URL?) {
+    init(id: UUID, isCompleted: Bool, name: String, date: Date, note: String?, url: URL?, image: UIImage?) {
         self.id = id
         self.date = date
         self.isCompleted = isCompleted
         self.name = name
         self.note = note
         self.url = url
+        self.image = image
     }
 }

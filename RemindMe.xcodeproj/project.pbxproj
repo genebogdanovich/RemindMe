@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		730807092570EFBB00DCEC59 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730807082570EFBB00DCEC59 /* String+.swift */; };
+		733C6E5A257786A90026F65C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C6E59257786A90026F65C /* ImagePicker.swift */; };
 		7342ACB9256E31B0007AF98F /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7342ACB8256E31B0007AF98F /* Collection+.swift */; };
 		7354E443256D18470069183F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E442256D18470069183F /* DataManager.swift */; };
 		7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E445256D1B420069183F /* ReminderListViewModel.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		730807082570EFBB00DCEC59 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		733C6E59257786A90026F65C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7342ACB8256E31B0007AF98F /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		7354E442256D18470069183F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7354E445256D1B420069183F /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				73A12EBF256CD9250047BB10 /* ReminderListView.swift */,
 				73A06557256CE05100BF5F95 /* ReminderView.swift */,
 				7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */,
+				733C6E59257786A90026F65C /* ImagePicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				730807092570EFBB00DCEC59 /* String+.swift in Sources */,
 				7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */,
 				73A12EBE256CD9250047BB10 /* SceneDelegate.swift in Sources */,
+				733C6E5A257786A90026F65C /* ImagePicker.swift in Sources */,
 				73F40F2A256CF62100C55AED /* Reminder.swift in Sources */,
 				73A0654F256CDF0800BF5F95 /* RemindMe.xcdatamodeld in Sources */,
 				73A12EC0256CD9250047BB10 /* ReminderListView.swift in Sources */,

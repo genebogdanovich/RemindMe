@@ -10,11 +10,13 @@ import SwiftUI
 /// A view that creates and updates reminders.
 struct DetailReminderView: View {
     @Environment(\.presentationMode) private var presentationMode
+    @State private var showingImagePicker = false
     
     @State private var name = ""
     @State private var note = ""
     @State private var date = Date()
     @State private var urlInputString = ""
+    @State private var inputImage: UIImage?
     
     // FIXME: Rename this.
     var viewModel: DetailReminderViewModel
@@ -42,6 +44,12 @@ struct DetailReminderView: View {
                         Text("Time")
                     })
                 }
+                
+                Section {
+                    Button("Add Image", action: {
+                        showingImagePicker.toggle()
+                    })
+                }
             }
             .navigationTitle(reminderToUpdate == nil ? "New Reminder" : "Edit Reminder")
             .navigationBarTitleDisplayMode(.inline)
@@ -59,9 +67,11 @@ struct DetailReminderView: View {
                             name: name,
                             date: date,
                             note: note,
-                            url: urlInputString.makeUrl())
+                            url: urlInputString.makeUrl(),
+                            image: inputImage)
                     )
                 } else {
+                    
                     viewModel.addNew(
                         Reminder(
                             id: UUID(),
@@ -69,7 +79,8 @@ struct DetailReminderView: View {
                             name: name,
                             date: date,
                             note: note,
-                            url: urlInputString.makeUrl())
+                            url: urlInputString.makeUrl(),
+                            image: inputImage)
                     )
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -80,6 +91,9 @@ struct DetailReminderView: View {
             // FIXME: Test this.
             .disabled(name.isEmpty)
             )
+            .sheet(isPresented: $showingImagePicker, content: {
+                ImagePicker(image: $inputImage)
+            })
         }
         // FIXME: Refactor this.
         .onAppear() {

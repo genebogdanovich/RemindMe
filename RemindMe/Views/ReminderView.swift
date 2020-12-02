@@ -29,6 +29,17 @@ struct ReminderView: View {
             
             VStack(alignment: .leading) {
                 
+                
+                
+                reminderViewModel.image?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .background(Color.yellow)
+                
+                    
+                
+                
                 Button(action: {
                     updateReminderViewIsPresented.toggle()
                 }, label: {
@@ -105,7 +116,8 @@ struct ReminderView_Previews: PreviewProvider {
                     name: "Go for a walk",
                     date: Date(),
                     note: "It helps with problem solving.",
-                    url: URL(string: "apple.com"))
+                    url: URL(string: "apple.com"),
+                    image: UIImage())
             ),
             reminderListViewModel: ReminderListViewModel())
     }
