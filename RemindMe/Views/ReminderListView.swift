@@ -26,6 +26,7 @@ struct ReminderListView: View {
                 })
             }
             
+            .listStyle(PlainListStyle())
             .navigationTitle("Reminders")
             .navigationBarItems(leading: Button(action: {
                     newReminderViewIsPresented.toggle()
@@ -46,12 +47,14 @@ struct ReminderListView: View {
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 })
+            
         }
         .sheet(isPresented: $newReminderViewIsPresented, onDismiss: {
             viewModel.fetchReminders()
         }, content: {
             DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: nil)
         })
+        
     }
 }
 
