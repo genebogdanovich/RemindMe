@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		730807092570EFBB00DCEC59 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730807082570EFBB00DCEC59 /* String+.swift */; };
-		733C6E5A257786A90026F65C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C6E59257786A90026F65C /* ImagePicker.swift */; };
+		733C6E5A257786A90026F65C /* UIImagePickerControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C6E59257786A90026F65C /* UIImagePickerControllerWrapper.swift */; };
+		733C6E5D2577B4B80026F65C /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C6E5C2577B4B80026F65C /* Image+.swift */; };
+		733C6E632577C7E70026F65C /* ReminderImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C6E622577C7E70026F65C /* ReminderImageViewerController.swift */; };
 		7342ACB9256E31B0007AF98F /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7342ACB8256E31B0007AF98F /* Collection+.swift */; };
 		7354E443256D18470069183F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E442256D18470069183F /* DataManager.swift */; };
 		7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E445256D1B420069183F /* ReminderListViewModel.swift */; };
@@ -16,6 +18,9 @@
 		7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44B256D1FA20069183F /* CoreDataHelper.swift */; };
 		7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44E256D1FCA0069183F /* DBHelper.swift */; };
 		7367DA3E2573ED3E0029B47B /* DetailReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */; };
+		73681EE42578CD4A00AA1014 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73681EE32578CD4A00AA1014 /* View+.swift */; };
+		73681EE82578CD8600AA1014 /* SheetNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73681EE72578CD8600AA1014 /* SheetNavigator.swift */; };
+		73681EFE2579147500AA1014 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73681EFD2579147500AA1014 /* ImageModifier.swift */; };
 		73A0654F256CDF0800BF5F95 /* RemindMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73A0654D256CDF0800BF5F95 /* RemindMe.xcdatamodeld */; };
 		73A06553256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06551256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift */; };
 		73A06554256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06552256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift */; };
@@ -33,7 +38,9 @@
 
 /* Begin PBXFileReference section */
 		730807082570EFBB00DCEC59 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		733C6E59257786A90026F65C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		733C6E59257786A90026F65C /* UIImagePickerControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerControllerWrapper.swift; sourceTree = "<group>"; };
+		733C6E5C2577B4B80026F65C /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
+		733C6E622577C7E70026F65C /* ReminderImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderImageViewerController.swift; sourceTree = "<group>"; };
 		7342ACB8256E31B0007AF98F /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		7354E442256D18470069183F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7354E445256D1B420069183F /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
@@ -41,6 +48,9 @@
 		7354E44B256D1FA20069183F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		7354E44E256D1FCA0069183F /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReminderView.swift; sourceTree = "<group>"; };
+		73681EE32578CD4A00AA1014 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		73681EE72578CD8600AA1014 /* SheetNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetNavigator.swift; sourceTree = "<group>"; };
+		73681EFD2579147500AA1014 /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 		73A0654E256CDF0800BF5F95 /* ReminderManagedObject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReminderManagedObject.xcdatamodel; sourceTree = "<group>"; };
 		73A06551256CDFA600BF5F95 /* ReminderManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		73A06552256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -74,6 +84,8 @@
 			children = (
 				7342ACB8256E31B0007AF98F /* Collection+.swift */,
 				730807082570EFBB00DCEC59 /* String+.swift */,
+				733C6E5C2577B4B80026F65C /* Image+.swift */,
+				73681EE32578CD4A00AA1014 /* View+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -85,6 +97,24 @@
 				7354E448256D1DB80069183F /* DetailReminderViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		73681EE22578CD3300AA1014 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				73681EE72578CD8600AA1014 /* SheetNavigator.swift */,
+				73681EFD2579147500AA1014 /* ImageModifier.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		73681EFB2579134100AA1014 /* UIKit Views */ = {
+			isa = PBXGroup;
+			children = (
+				733C6E622577C7E70026F65C /* ReminderImageViewerController.swift */,
+				733C6E59257786A90026F65C /* UIImagePickerControllerWrapper.swift */,
+			);
+			path = "UIKit Views";
 			sourceTree = "<group>";
 		};
 		73697AD1256E26CC007BD363 /* Database */ = {
@@ -116,6 +146,8 @@
 		73A12EBA256CD9250047BB10 /* RemindMe */ = {
 			isa = PBXGroup;
 			children = (
+				73681EFB2579134100AA1014 /* UIKit Views */,
+				73681EE22578CD3300AA1014 /* Protocols */,
 				7342ACB7256E319B007AF98F /* Extensions */,
 				73697AD1256E26CC007BD363 /* Database */,
 				73F40F24256CF54B00C55AED /* App */,
@@ -153,7 +185,6 @@
 				73A12EBF256CD9250047BB10 /* ReminderListView.swift */,
 				73A06557256CE05100BF5F95 /* ReminderView.swift */,
 				7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */,
-				733C6E59257786A90026F65C /* ImagePicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,14 +280,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73681EFE2579147500AA1014 /* ImageModifier.swift in Sources */,
 				7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */,
 				73A06554256CDFA600BF5F95 /* ReminderManagedObject+CoreDataProperties.swift in Sources */,
 				73A12EBC256CD9250047BB10 /* AppDelegate.swift in Sources */,
+				73681EE42578CD4A00AA1014 /* View+.swift in Sources */,
 				7342ACB9256E31B0007AF98F /* Collection+.swift in Sources */,
 				730807092570EFBB00DCEC59 /* String+.swift in Sources */,
 				7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */,
 				73A12EBE256CD9250047BB10 /* SceneDelegate.swift in Sources */,
-				733C6E5A257786A90026F65C /* ImagePicker.swift in Sources */,
+				733C6E5A257786A90026F65C /* UIImagePickerControllerWrapper.swift in Sources */,
 				73F40F2A256CF62100C55AED /* Reminder.swift in Sources */,
 				73A0654F256CDF0800BF5F95 /* RemindMe.xcdatamodeld in Sources */,
 				73A12EC0256CD9250047BB10 /* ReminderListView.swift in Sources */,
@@ -265,7 +298,10 @@
 				73A06558256CE05100BF5F95 /* ReminderView.swift in Sources */,
 				7354E449256D1DB80069183F /* DetailReminderViewModel.swift in Sources */,
 				7367DA3E2573ED3E0029B47B /* DetailReminderView.swift in Sources */,
+				733C6E5D2577B4B80026F65C /* Image+.swift in Sources */,
 				73F40F1C256CEA5200C55AED /* Constants.swift in Sources */,
+				733C6E632577C7E70026F65C /* ReminderImageViewerController.swift in Sources */,
+				73681EE82578CD8600AA1014 /* SheetNavigator.swift in Sources */,
 				7354E443256D18470069183F /* DataManager.swift in Sources */,
 				73F40F26256CF5A600C55AED /* ReminderManagedObject+.swift in Sources */,
 			);

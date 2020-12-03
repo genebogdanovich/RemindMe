@@ -10,7 +10,8 @@ import SwiftUI
 /// A view that creates and updates reminders.
 struct DetailReminderView: View {
     @Environment(\.presentationMode) private var presentationMode
-    @State private var showingImagePicker = false
+    
+    @State private var showingActionSheet = false
     
     @State private var name = ""
     @State private var note = ""
@@ -18,10 +19,11 @@ struct DetailReminderView: View {
     @State private var urlInputString = ""
     @State private var inputImage: UIImage?
     
-    // FIXME: Rename this.
+    @ObservedObject private var sheetNavigator = DetailReminderViewSheetNavigator()
+    
     var viewModel: DetailReminderViewModel
     let reminderToUpdate: Reminder?
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -46,13 +48,54 @@ struct DetailReminderView: View {
                 }
                 
                 Section {
-                    Button("Add Image", action: {
-                        showingImagePicker.toggle()
+                    Button(action: {
+                        showingActionSheet = true
+                    }, label: {
+                        Text("Add Photo")
                     })
+                    
+                    if inputImage != nil {
+                        HStack() {
+                            Button(action: {
+                                withAnimation {
+                                    inputImage = nil
+                                }
+                                
+                            }, label: {
+                                Image(systemName: "trash.fill")
+                                    .foregroundColor(.red)
+                            })
+                            .buttonStyle(PlainButtonStyle())
+                            inputImage.map(Image.init)?
+                                .modifier(ImageIconViewModifier())
+                            Text("Image")
+                        }
+                    }
                 }
             }
             .navigationTitle(reminderToUpdate == nil ? "New Reminder" : "Edit Reminder")
             .navigationBarTitleDisplayMode(.inline)
+            
+            .actionSheet(isPresented: $showingActionSheet, content: {
+                ActionSheet(title: Text("Select Photo"), message: nil, buttons: [
+                    .default(Text("Photo Library")) {
+                        sheetNavigator.sheetDestination = .photoLibrary(image: $inputImage)
+                        sheetNavigator.showingSheet = true
+                    },
+                    .default(Text("Take Photo")) {
+                        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                            sheetNavigator.sheetDestination = .camera(image: $inputImage)
+                            sheetNavigator.showingSheet = true
+                        }
+                    },
+                    .cancel()
+                ])
+            })
+            
+            .sheet(isPresented: $sheetNavigator.showingSheet, content: {
+                sheetNavigator.sheetView()
+            })
+            
             .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }, label: {
@@ -71,7 +114,6 @@ struct DetailReminderView: View {
                             image: inputImage)
                     )
                 } else {
-                    
                     viewModel.addNew(
                         Reminder(
                             id: UUID(),
@@ -91,9 +133,6 @@ struct DetailReminderView: View {
             // FIXME: Test this.
             .disabled(name.isEmpty)
             )
-            .sheet(isPresented: $showingImagePicker, content: {
-                ImagePicker(image: $inputImage)
-            })
         }
         // FIXME: Refactor this.
         .onAppear() {
@@ -102,15 +141,50 @@ struct DetailReminderView: View {
                 note = reminderToUpdate.note ?? ""
                 urlInputString = reminderToUpdate.url?.host ?? ""
                 date = reminderToUpdate.date
+                inputImage = reminderToUpdate.image
             } else {
                 name = "New Reminder"
             }
         }
     }
+    
+    init(viewModel: DetailReminderViewModel = DetailReminderViewModel(), reminderToUpdate: Reminder?) {
+        self.viewModel = viewModel
+        self.reminderToUpdate = reminderToUpdate
+    }
 }
 
+// MARK: - DetailReminderViewSheetNavigator
+
+class DetailReminderViewSheetNavigator: SheetNavigator {
+    @Published var showingSheet = false
+    var sheetDestination: SheetDestination = .none
+    
+    enum SheetDestination {
+        case none
+        case camera(image: Binding<UIImage?>)
+        case photoLibrary(image: Binding<UIImage?>)
+    }
+    
+    func sheetView() -> AnyView {
+        switch sheetDestination {
+        case .none:
+            return Text("None").eraseToAnyView()
+        case .camera(let image):
+            
+            return UIImagePickerControllerWrapper(image: image, sourceType: .camera).eraseToAnyView()
+        case .photoLibrary(let image):
+            
+            return UIImagePickerControllerWrapper(image: image, sourceType: .photoLibrary).eraseToAnyView()
+        }
+    }
+}
+
+// MARK: Previews
+
 struct DetailReminderView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: nil)
+        return DetailReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Do something", date: Date(), note: "Some kind of note", url: URL(string: "https://www.apple.com")!, image: UIImage()))
     }
 }

@@ -33,8 +33,12 @@ final class ReminderListViewModel: ObservableObject {
     }
 }
 
-struct ReminderViewModel {
-    let reminder: Reminder
+class ReminderViewModel: ObservableObject {
+    var reminder: Reminder
+    
+    init(reminder: Reminder) {
+        self.reminder = reminder
+    }
     
     var image: Image? {
         if let uiImage = reminder.image {
@@ -42,6 +46,11 @@ struct ReminderViewModel {
         }
         return nil
     }
+    
+    var uiImage: UIImage? {
+        return reminder.image
+    }
+    
     
     var id: UUID {
         return reminder.id

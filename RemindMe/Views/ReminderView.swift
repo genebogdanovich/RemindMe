@@ -9,10 +9,13 @@ import SwiftUI
 import CoreData
 
 struct ReminderView: View {
-    let reminderViewModel: ReminderViewModel
+    @ObservedObject var reminderViewModel: ReminderViewModel
     let reminderListViewModel: ReminderListViewModel
-    @State private var updateReminderViewIsPresented = false
+
+    @ObservedObject var sheetNavigator = ReminderViewSheetNavigator()
+    
     @State private var colorOfDateLabel = Color.gray
+    
     let timer = Timer
         .publish(every: 1, on: .main, in: .common)
         .autoconnect()
@@ -28,38 +31,25 @@ struct ReminderView: View {
                 }
             
             VStack(alignment: .leading) {
-                
-                
-                
-                reminderViewModel.image?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .background(Color.yellow)
-                
-                    
-                
-                
                 Button(action: {
-                    updateReminderViewIsPresented.toggle()
+                    sheetNavigator.sheetDestination = .detailView(reminderToUpdate: reminderViewModel.reminder)
+                    sheetNavigator.showingSheet = true
                 }, label: {
                     Text(reminderViewModel.name)
                         .font(.body)
                 })
                 .buttonStyle(PlainButtonStyle())
                 
+            
                 Text(reminderViewModel.dateString)
-                    
                     .font(.callout)
                     .foregroundColor(colorOfDateLabel)
                     .onAppear(perform: updateColorOfDateLabel)
                     .onReceive(timer, perform: { _ in updateColorOfDateLabel() })
                 
-                
                 reminderViewModel.note.map(Text.init)?
                     .font(.callout)
                     .foregroundColor(.gray)
-                
                 
                 if reminderViewModel.urlString != nil {
                     Button(action: {
@@ -69,15 +59,24 @@ struct ReminderView: View {
                     })
                     .buttonStyle(PlainButtonStyle())
                 }
+                
+                Button(action: {
+                    sheetNavigator.sheetDestination = .imageView(uiImage: reminderViewModel.uiImage!)
+                    sheetNavigator.showingSheet = true
+                }, label: {
+                    reminderViewModel.image?
+                        .modifier(ImageIconViewModifier())
+                })
+                .buttonStyle(PlainButtonStyle())
+                
             }
-            
         }
-        .sheet(isPresented: $updateReminderViewIsPresented, onDismiss: {
+        .fullScreenCover(isPresented: $sheetNavigator.showingSheet, onDismiss: {
             reminderListViewModel.fetchReminders()
         }, content: {
-            DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: reminderViewModel.reminder)
+            
+            sheetNavigator.sheetView()
         })
-        
     }
     
     private func updateColorOfDateLabel() {
@@ -89,6 +88,37 @@ struct ReminderView: View {
     }
 }
 
+// MARK: - ReminderViewSheetNavigator
+
+class ReminderViewSheetNavigator: SheetNavigator {
+    
+    @Published var showingSheet = false
+    var sheetDestination: SheetDestination = .none
+    
+    enum SheetDestination {
+        case none
+        case detailView(reminderToUpdate: Reminder)
+        case imageView(uiImage: UIImage)
+        
+    }
+    
+    func sheetView() -> AnyView {
+        switch sheetDestination {
+        case .none:
+            return Text("None").eraseToAnyView()
+        case .detailView(let reminderToUpdate):
+            return DetailReminderView(reminderToUpdate: reminderToUpdate).eraseToAnyView()
+        case .imageView(let uiImage):
+            
+            return ReminderImageViewerControllerWrapper(image: uiImage).eraseToAnyView()
+        }
+    }
+    
+    @Published var showingReminderDetailView = false
+    @Published var showingImageView = false
+}
+
+// MARK: - URLView
 
 struct URLView: View {
     let url: String
@@ -105,6 +135,20 @@ struct URLView: View {
     }
 }
 
+// MARK: - ImageIconViewModifier
+
+struct ImageIconViewModifier: ImageModifier {
+    func body(image: Image) -> some View {
+        image
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 32, height: 32)
+            .clipped()
+            .cornerRadius(8)
+    }
+}
+
+// MARK: - Previews
 
 struct ReminderView_Previews: PreviewProvider {
     static var previews: some View {

@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ReminderListView: View {
     @ObservedObject private var viewModel = ReminderListViewModel()
-    
-
     @State private var newReminderViewIsPresented = false
-    
     
     var body: some View {
         NavigationView {
@@ -50,9 +47,10 @@ struct ReminderListView: View {
             
         }
         .sheet(isPresented: $newReminderViewIsPresented, onDismiss: {
+            
             viewModel.fetchReminders()
         }, content: {
-            DetailReminderView(viewModel: DetailReminderViewModel(), reminderToUpdate: nil)
+            DetailReminderView(reminderToUpdate: nil)
         })
         
     }

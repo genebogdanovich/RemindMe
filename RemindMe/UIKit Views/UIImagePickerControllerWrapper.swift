@@ -1,5 +1,5 @@
 //
-//  ImagePicker.swift
+//  UIImagePickerControllerWrapper.swift
 //  RemindMe
 //
 //  Created by Gene Bogdanovich on 2.12.20.
@@ -7,19 +7,21 @@
 
 import Foundation
 import SwiftUI
+import MobileCoreServices
 
-struct ImagePicker: UIViewControllerRepresentable {
+struct UIImagePickerControllerWrapper: UIViewControllerRepresentable {
     @Binding var image: UIImage?
     @Environment(\.presentationMode) var presentationMode
+    let sourceType: UIImagePickerController.SourceType
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        var parent: ImagePicker
+        var parent: UIImagePickerControllerWrapper
         
-        init(_ parent: ImagePicker) {
+        init(_ parent: UIImagePickerControllerWrapper) {
             self.parent = parent
         }
         
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let uiImage = info[.originalImage] as? UIImage {
                 parent.image = uiImage
             }
@@ -36,7 +38,9 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
-        
+        picker.sourceType = sourceType
+        // Only allow to select images.
+        picker.mediaTypes = [kUTTypeImage as String]
         return picker
     }
     

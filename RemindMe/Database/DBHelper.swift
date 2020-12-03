@@ -18,11 +18,3 @@ public protocol DBHelper {
     func update(_ object: Object)
     func delete(_ object: Object)
 }
-
-
-// Why do we need this?
-//public extension DBHelper {
-//    func fetch(_ objectType: Object.Type, predicate: Predicate? = nil, limit: Int? = nil) -> Result<[Object], Error> {
-//        return fetch(objectType, predicate: predicate, limit: limit)
-//    }
-//}

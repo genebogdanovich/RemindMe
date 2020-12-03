@@ -65,7 +65,7 @@ extension ReminderDataManager: DataManager {
             existingReminder.name = reminder.name
             existingReminder.note = reminder.note
             existingReminder.url = reminder.url
-            existingReminder.imageData = reminder.image?.jpegData(compressionQuality: 0.5)
+            existingReminder.imageData = reminder.image?.jpegData(compressionQuality: 1)
             dbHelper.update(existingReminder)
             return
         }
@@ -79,7 +79,7 @@ extension ReminderDataManager: DataManager {
         newReminder.note = reminder.note
         newReminder.url = reminder.url
         newReminder.isCompleted = reminder.isCompleted
-        newReminder.imageData = reminder.image?.jpegData(compressionQuality: 0.5)
+        newReminder.imageData = reminder.image?.jpegData(compressionQuality: 1)
         dbHelper.create(newReminder) // All this does is it saves our ManagedObjectContext.
     }
     
