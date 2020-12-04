@@ -140,9 +140,16 @@ extension ReminderListViewModel: ReminderListViewModelProtocol {
     
     func toggleIsCompleted(for reminder: Reminder) {
         dataManager.toggleIsCompleted(for: reminder)
+        
+        if !reminder.isCompleted {
+            LocalUserNotificationsManager.shared.cancelPendingNotification(withIdentifier: reminder.id)
+        } else if reminder.isCompleted {
+            if reminder.date > Date() {
+                LocalUserNotificationsManager.shared.createLocalUserNotification(for: reminder)
+            }
+        }
         fetchReminders()
     }
-    
     
     func deleteReminders(at indices: IndexSet) {
         dataManager.deleteReminders(at: indices)

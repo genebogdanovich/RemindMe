@@ -37,7 +37,7 @@ extension DetailReminderViewModel: DetailReminderViewModelProtocol {
         
         // Schedule notification
         
-        LocalUserNotificationsManager.shared.createLocalUserNotificationForReminder(withName: reminder.name, note: reminder.note, date: reminder.date, id: reminder.id)
+        LocalUserNotificationsManager.shared.createLocalUserNotification(for: reminder)
 
         dataManager.add(Reminder(
                             id: reminder.id,

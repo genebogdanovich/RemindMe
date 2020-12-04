@@ -30,16 +30,20 @@ class LocalUserNotificationsManager: NSObject, UNUserNotificationCenterDelegate 
         
     }
     
-    func createLocalUserNotificationForReminder(withName name: String, note: String?, date: Date, id: UUID) {
+    func createLocalUserNotification(for reminder: Reminder) {
         let content = UNMutableNotificationContent()
-        content.title = name
-        content.subtitle = note ?? ""
+        content.title = reminder.name
+        content.subtitle = reminder.note ?? ""
         content.sound = .default
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute, .day, .month], from: date), repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute, .day, .month], from: reminder.date), repeats: false)
         
-        let request = UNNotificationRequest(identifier: id.uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: reminder.id.uuidString, content: content, trigger: trigger)
         
         createLocalUserNotification(withRequest: request)
+    }
+    
+    func cancelPendingNotification(withIdentifier identifier: UUID) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier.uuidString])
     }
 }
