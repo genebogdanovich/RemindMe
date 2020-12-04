@@ -12,9 +12,16 @@ import UIKit
 class ReminderImageViewerController: UIViewController {
     var image: UIImage!
     
+    lazy var imageViewTopConstraint = NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: 0)
+    lazy var imageViewBottomConstraint = NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0)
+    lazy var imageViewLeadingConstraint = NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: 0)
+    lazy var imageViewTrailingConstraint = NSLayoutConstraint(item: imageView, attribute: .trailing, relatedBy: .equal, toItem: scrollView, attribute: .trailing, multiplier: 1, constant: 0)
+    
+    
     let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         
         return view
     }()
@@ -66,12 +73,16 @@ class ReminderImageViewerController: UIViewController {
         let verticalSpace = size.height - imageView.frame.height
         
         let yOffset = max(0, verticalSpace / 2)
-        imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: yOffset).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: yOffset).isActive = true
+        imageViewTopConstraint.constant = yOffset
+        imageViewBottomConstraint.constant = yOffset
         
-        let xOffset = max(0, (size.width - imageView.frame.width) / 2)
-        imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: xOffset).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: xOffset).isActive = true
+        let horizontalSpace = size.width - imageView.frame.width
+        
+        
+        
+        let xOffset = max(0, horizontalSpace / 2)
+        imageViewLeadingConstraint.constant = xOffset
+        imageViewTrailingConstraint.constant = xOffset
     }
     
     private func configureLayout() {
@@ -80,6 +91,9 @@ class ReminderImageViewerController: UIViewController {
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        // Image view
+        let imageConstraints = [imageViewTopConstraint, imageViewBottomConstraint, imageViewLeadingConstraint, imageViewTrailingConstraint]
+        NSLayoutConstraint.activate(imageConstraints)
     }
 }
 
