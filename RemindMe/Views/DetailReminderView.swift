@@ -130,7 +130,6 @@ struct DetailReminderView: View {
                 Text("Done")
                     .fontWeight(.bold)
             })
-            // FIXME: Test this.
             .disabled(name.isEmpty)
             )
         }

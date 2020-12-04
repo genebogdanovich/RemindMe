@@ -32,6 +32,9 @@ class ReminderImageViewerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Image"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissSelf))
+        
         scrollView.delegate = self
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
@@ -39,6 +42,10 @@ class ReminderImageViewerController: UIViewController {
         configureLayout()
         updateZoomScale()
         updateConstraintsForSize(view.bounds.size)
+    }
+    
+    @objc private func dismissSelf() {
+        dismiss(animated: true, completion: nil)
     }
     
     // When an image loads, it's gonna be zoomed out.
@@ -84,9 +91,9 @@ extension ReminderImageViewerController: UIScrollViewDelegate {
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         updateConstraintsForSize(view.bounds.size)
         
-        if scrollView.zoomScale < minZoomScale {
-            dismiss(animated: true, completion: nil)
-        }
+//        if scrollView.zoomScale < minZoomScale {
+//            dismiss(animated: true, completion: nil)
+//        }
     }
 }
 
@@ -95,11 +102,15 @@ struct ReminderImageViewerControllerWrapper: UIViewControllerRepresentable {
     let image: UIImage
     
     func makeUIViewController(context: Context) -> UIViewController {
+        
         let viewController = ReminderImageViewerController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
         viewController.image = image
         
-        return viewController
+        return navigationController
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
+

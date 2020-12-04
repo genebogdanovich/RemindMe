@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Local notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { success, error in
             if success {
-                print("Got the local notifications permission.")
+                
             } else if let error = error {
                 print(error.localizedDescription)
             }
