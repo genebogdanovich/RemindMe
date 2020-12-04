@@ -12,16 +12,22 @@ import UIKit
 class ReminderImageViewerController: UIViewController {
     var image: UIImage!
     
+    // Image view constraints
     lazy var imageViewTopConstraint = NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: 0)
     lazy var imageViewBottomConstraint = NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0)
     lazy var imageViewLeadingConstraint = NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: 0)
     lazy var imageViewTrailingConstraint = NSLayoutConstraint(item: imageView, attribute: .trailing, relatedBy: .equal, toItem: scrollView, attribute: .trailing, multiplier: 1, constant: 0)
     
+    // Scroll view constraints
+    lazy var scrollViewTopConstraint = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
+    lazy var scrollViewBottomConstraint = NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+    lazy var scrollViewLeadingConstraint = NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+    lazy var scrollViewTrailingConstraint = NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0)
+    
     
     let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         
         return view
     }()
@@ -41,6 +47,8 @@ class ReminderImageViewerController: UIViewController {
         super.viewDidLoad()
         title = "Image"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissSelf))
+        navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
+        
         
         scrollView.delegate = self
         view.addSubview(scrollView)
@@ -49,6 +57,11 @@ class ReminderImageViewerController: UIViewController {
         configureLayout()
         updateZoomScale()
         updateConstraintsForSize(view.bounds.size)
+        
+    }
+    
+    var topBarHeight: CGFloat {
+        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) + (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
     
     @objc private func dismissSelf() {
@@ -73,8 +86,8 @@ class ReminderImageViewerController: UIViewController {
         let verticalSpace = size.height - imageView.frame.height
         
         let yOffset = max(0, verticalSpace / 2)
-        imageViewTopConstraint.constant = yOffset
-        imageViewBottomConstraint.constant = yOffset
+        imageViewTopConstraint.constant = yOffset - topBarHeight
+        imageViewBottomConstraint.constant = yOffset - topBarHeight
         
         let horizontalSpace = size.width - imageView.frame.width
         
@@ -87,10 +100,8 @@ class ReminderImageViewerController: UIViewController {
     
     private func configureLayout() {
         // Scroll view
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        let scrollViewConstraints = [scrollViewTopConstraint, scrollViewBottomConstraint, scrollViewLeadingConstraint, scrollViewTrailingConstraint]
+        NSLayoutConstraint.activate(scrollViewConstraints)
         // Image view
         let imageConstraints = [imageViewTopConstraint, imageViewBottomConstraint, imageViewLeadingConstraint, imageViewTrailingConstraint]
         NSLayoutConstraint.activate(imageConstraints)

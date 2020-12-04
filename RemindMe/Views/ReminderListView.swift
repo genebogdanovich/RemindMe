@@ -34,7 +34,10 @@ struct ReminderListView: View {
                     }
                 }), trailing: Menu {
                     Button(action: {
-                        viewModel.showCompleted.toggle()
+                        withAnimation {
+                            
+                            viewModel.showCompleted.toggle()
+                        }
                     }, label: {
                         HStack {
                             Text(viewModel.showCompleted ? "Hide Completed" : "Show Completed")

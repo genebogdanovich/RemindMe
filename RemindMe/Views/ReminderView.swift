@@ -27,7 +27,9 @@ struct ReminderView: View {
                 .font(.headline)
                 .foregroundColor(reminderViewModel.isCompleted ? .blue : .secondary)
                 .onTapGesture {
-                    reminderListViewModel.toggleIsCompleted(for: reminderViewModel.reminder)
+                    withAnimation {
+                        reminderListViewModel.toggleIsCompleted(for: reminderViewModel.reminder)
+                    }
                 }
             
             VStack(alignment: .leading) {
