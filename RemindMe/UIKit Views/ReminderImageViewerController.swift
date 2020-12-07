@@ -47,12 +47,24 @@ class ReminderImageViewerController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        tap.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(tap)
+        
+        
         scrollView.contentSize = imageView.bounds.size
         configureLayout()
     }
     
     override func viewWillLayoutSubviews() {
         updateMinZoomScaleForSize(view.bounds.size)
+    }
+    
+    @objc private func doubleTapped() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.updateMinZoomScaleForSize(self.view.bounds.size)
+        })
     }
     
     /// This method calculates the zoom scale for the scroll view.
