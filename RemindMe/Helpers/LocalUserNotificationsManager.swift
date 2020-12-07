@@ -26,8 +26,6 @@ class LocalUserNotificationsManager: NSObject, UNUserNotificationCenterDelegate 
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { _ in
             // TODO: Error handling.
         })
-        
-        
     }
     
     func createLocalUserNotification(for reminder: Reminder) {

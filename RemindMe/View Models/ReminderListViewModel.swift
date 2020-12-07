@@ -34,6 +34,7 @@ final class ReminderListViewModel: ObservableObject {
 }
 
 class ReminderViewModel: ObservableObject {
+    
     var reminder: Reminder
     
     init(reminder: Reminder) {
@@ -59,6 +60,8 @@ class ReminderViewModel: ObservableObject {
     var isCompleted: Bool {
         return reminder.isCompleted
     }
+    
+    
     
     var dateString: String {
         return format(date: date)

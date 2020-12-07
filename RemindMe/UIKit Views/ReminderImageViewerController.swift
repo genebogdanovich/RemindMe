@@ -52,12 +52,17 @@ class ReminderImageViewerController: UIViewController {
         tap.numberOfTapsRequired = 2
         scrollView.addGestureRecognizer(tap)
         
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissSelf))
+        swipe.direction = .down
+        scrollView.addGestureRecognizer(swipe)
+        
         
         scrollView.contentSize = imageView.bounds.size
-        configureLayout()
+        
     }
     
     override func viewWillLayoutSubviews() {
+        configureLayout()
         updateMinZoomScaleForSize(view.bounds.size)
     }
     
@@ -78,10 +83,6 @@ class ReminderImageViewerController: UIViewController {
         scrollView.minimumZoomScale = minScale
         scrollView.zoomScale = minScale
         print("zoomScale: \(minScale)")
-    }
-    
-    private var topBarHeight: CGFloat {
-        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) + (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
     
     @objc private func dismissSelf() {
