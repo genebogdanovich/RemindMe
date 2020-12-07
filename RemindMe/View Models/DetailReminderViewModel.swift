@@ -39,14 +39,10 @@ extension DetailReminderViewModel: DetailReminderViewModelProtocol {
         
         LocalUserNotificationsManager.shared.createLocalUserNotification(for: reminder)
 
-        dataManager.add(Reminder(
-                            id: reminder.id,
-                            isCompleted: reminder.isCompleted,
-                            name: reminder.name,
-                            date: reminder.date,
-                            note: reminder.note,
-                            url: reminder.url,
-                            image: reminder.image))
+        
+        print(reminder.name + " " + String(reminder.isCompleted))
+        
+        dataManager.add(reminder)
         
     }
 }
