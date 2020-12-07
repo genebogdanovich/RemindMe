@@ -12,27 +12,17 @@ import UIKit
 class ReminderImageViewerController: UIViewController {
     var image: UIImage!
     
-    // Image view constraints
-    lazy var imageViewTopConstraint = NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: 0)
-    lazy var imageViewBottomConstraint = NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0)
-    lazy var imageViewLeadingConstraint = NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: 0)
-    lazy var imageViewTrailingConstraint = NSLayoutConstraint(item: imageView, attribute: .trailing, relatedBy: .equal, toItem: scrollView, attribute: .trailing, multiplier: 1, constant: 0)
-    
-    // Scroll view constraints
-    lazy var scrollViewTopConstraint = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-    lazy var scrollViewBottomConstraint = NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
-    lazy var scrollViewLeadingConstraint = NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-    lazy var scrollViewTrailingConstraint = NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0)
-    
+    // MARK: - Views
     
     let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.showsHorizontalScrollIndicator = false
+        view.showsVerticalScrollIndicator = false
         
         return view
     }()
     
-
     lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -45,57 +35,45 @@ class ReminderImageViewerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Delegates
+        scrollView.delegate = self
+
         title = "Image"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissSelf))
         navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
         
+        navigationController?.navigationBar.isTranslucent = false
         
-        scrollView.delegate = self
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.contentSize = imageView.bounds.size
         configureLayout()
-        updateZoomScale()
-        updateConstraintsForSize(view.bounds.size)
-        
     }
     
-    var topBarHeight: CGFloat {
+    override func viewWillLayoutSubviews() {
+        updateMinZoomScaleForSize(view.bounds.size)
+    }
+    
+    /// This method calculates the zoom scale for the scroll view.
+    /// A zoom scale of 1 indicates that the content displays at its normal size.
+    /// A zoom scale of less than 1 shows a zoomed-out version of the content, and a zoom scale greater than 1 shows the content zoomed in.
+    private func updateMinZoomScaleForSize(_ size: CGSize) {
+        let widthScale = size.width / imageView.bounds.width
+        let heightScale = size.height / imageView.bounds.height
+        let minScale = min(widthScale, heightScale)
+        
+        scrollView.minimumZoomScale = minScale
+        scrollView.zoomScale = minScale
+        print("zoomScale: \(minScale)")
+    }
+    
+    private var topBarHeight: CGFloat {
         return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) + (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
     
     @objc private func dismissSelf() {
         dismiss(animated: true, completion: nil)
-    }
-    
-    // When an image loads, it's gonna be zoomed out.
-    private func updateZoomScale() {
-        scrollView.minimumZoomScale = minZoomScale
-        scrollView.zoomScale = minZoomScale
-    }
-    
-    var minZoomScale: CGFloat {
-        let viewSize = view.bounds.size
-        let widthScale = viewSize.width / imageView.bounds.width
-        let heightScale = viewSize.height / imageView.bounds.height
-        
-        return min(widthScale, heightScale)
-    }
-    
-    private func updateConstraintsForSize(_ size: CGSize) {
-        let verticalSpace = size.height - imageView.frame.height
-        
-        let yOffset = max(0, verticalSpace / 2)
-        imageViewTopConstraint.constant = yOffset - topBarHeight
-        imageViewBottomConstraint.constant = yOffset - topBarHeight
-        
-        let horizontalSpace = size.width - imageView.frame.width
-        
-        
-        
-        let xOffset = max(0, horizontalSpace / 2)
-        imageViewLeadingConstraint.constant = xOffset
-        imageViewTrailingConstraint.constant = xOffset
     }
     
     private func configureLayout() {
@@ -106,7 +84,88 @@ class ReminderImageViewerController: UIViewController {
         let imageConstraints = [imageViewTopConstraint, imageViewBottomConstraint, imageViewLeadingConstraint, imageViewTrailingConstraint]
         NSLayoutConstraint.activate(imageConstraints)
     }
+    
+    
+    // MARK: - Constraints
+    
+    // imageView constraints
+    lazy var imageViewTopConstraint = NSLayoutConstraint(
+        item: imageView,
+        attribute: .top,
+        relatedBy: .equal,
+        toItem: scrollView,
+        attribute: .top,
+        multiplier: 1,
+        constant: 0
+    )
+    lazy var imageViewBottomConstraint = NSLayoutConstraint(
+        item: imageView,
+        attribute: .bottom,
+        relatedBy: .equal,
+        toItem: scrollView,
+        attribute: .bottom,
+        multiplier: 1,
+        constant: 0
+    )
+    lazy var imageViewLeadingConstraint = NSLayoutConstraint(
+        item: imageView,
+        attribute: .leading,
+        relatedBy: .equal,
+        toItem: scrollView,
+        attribute: .leading,
+        multiplier: 1,
+        constant: 0
+    )
+    lazy var imageViewTrailingConstraint = NSLayoutConstraint(
+        item: imageView,
+        attribute: .trailing,
+        relatedBy: .equal,
+        toItem: scrollView,
+        attribute: .trailing,
+        multiplier: 1,
+        constant: 0
+    )
+    
+    // scrollView constraints
+    lazy var scrollViewTopConstraint = NSLayoutConstraint(
+        item: scrollView,
+        attribute: .top,
+        relatedBy: .equal,
+        toItem: view,
+        attribute: .top,
+        multiplier: 1,
+        constant: 0
+    )
+    lazy var scrollViewBottomConstraint = NSLayoutConstraint(
+        item: scrollView,
+        attribute: .bottom,
+        relatedBy: .equal,
+        toItem: view,
+        attribute: .bottom,
+        multiplier: 1,
+        constant: 0
+    )
+    lazy var scrollViewLeadingConstraint = NSLayoutConstraint(
+        item: scrollView,
+        attribute: .leading,
+        relatedBy: .equal,
+        toItem: view,
+        attribute: .leading,
+        multiplier: 1,
+        constant: 0
+    )
+    lazy var scrollViewTrailingConstraint = NSLayoutConstraint(
+        item: scrollView,
+        attribute: .trailing,
+        relatedBy: .equal,
+        toItem: view,
+        attribute: .trailing,
+        multiplier: 1,
+        constant: 0
+    )
 }
+
+// MARK: - UIScrollViewDelegate
 
 extension ReminderImageViewerController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -115,13 +174,22 @@ extension ReminderImageViewerController: UIScrollViewDelegate {
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         updateConstraintsForSize(view.bounds.size)
+    }
+    
+    private func updateConstraintsForSize(_ size: CGSize) {
+        let yOffset = max(0, (size.height - imageView.frame.height) / 2)
+        imageViewTopConstraint.constant = yOffset
+        imageViewBottomConstraint.constant = yOffset
         
-//        if scrollView.zoomScale < minZoomScale {
-//            dismiss(animated: true, completion: nil)
-//        }
+        let xOffset = max(0, (size.width - imageView.frame.width) / 2)
+        imageViewLeadingConstraint.constant = xOffset
+        imageViewTrailingConstraint.constant = xOffset
+        
+        view.layoutIfNeeded()
     }
 }
 
+// MARK: - UIViewControllerRepresentable
 
 struct ReminderImageViewerControllerWrapper: UIViewControllerRepresentable {
     let image: UIImage
@@ -138,4 +206,6 @@ struct ReminderImageViewerControllerWrapper: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
+
+
 
