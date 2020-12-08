@@ -18,6 +18,7 @@
 		7354E449256D1DB80069183F /* DetailReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E448256D1DB80069183F /* DetailReminderViewModel.swift */; };
 		7354E44C256D1FA20069183F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44B256D1FA20069183F /* CoreDataHelper.swift */; };
 		7354E44F256D1FCA0069183F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354E44E256D1FCA0069183F /* DBHelper.swift */; };
+		73623272257F5A270088396D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73623271257F5A270088396D /* DashboardView.swift */; };
 		7367DA3E2573ED3E0029B47B /* DetailReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */; };
 		73681EE42578CD4A00AA1014 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73681EE32578CD4A00AA1014 /* View+.swift */; };
 		73681EE82578CD8600AA1014 /* SheetNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73681EE72578CD8600AA1014 /* SheetNavigator.swift */; };
@@ -49,6 +50,7 @@
 		7354E448256D1DB80069183F /* DetailReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReminderViewModel.swift; sourceTree = "<group>"; };
 		7354E44B256D1FA20069183F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		7354E44E256D1FCA0069183F /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		73623271257F5A270088396D /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReminderView.swift; sourceTree = "<group>"; };
 		73681EE32578CD4A00AA1014 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		73681EE72578CD8600AA1014 /* SheetNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetNavigator.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				73A12EBF256CD9250047BB10 /* ReminderListView.swift */,
 				73A06557256CE05100BF5F95 /* ReminderView.swift */,
 				7367DA3D2573ED3E0029B47B /* DetailReminderView.swift */,
+				73623271257F5A270088396D /* DashboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				73A12EBE256CD9250047BB10 /* SceneDelegate.swift in Sources */,
 				733C6E5A257786A90026F65C /* UIImagePickerControllerWrapper.swift in Sources */,
 				73F40F2A256CF62100C55AED /* Reminder.swift in Sources */,
+				73623272257F5A270088396D /* DashboardView.swift in Sources */,
 				73A0654F256CDF0800BF5F95 /* RemindMe.xcdatamodeld in Sources */,
 				73A12EC0256CD9250047BB10 /* ReminderListView.swift in Sources */,
 				7354E446256D1B420069183F /* ReminderListViewModel.swift in Sources */,
