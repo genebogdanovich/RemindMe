@@ -18,6 +18,7 @@ struct DetailReminderView: View {
     @State private var date = Date()
     @State private var urlInputString = ""
     @State private var inputImage: UIImage?
+    @State private var isFlagged: Bool = false
     
     @ObservedObject private var sheetNavigator = DetailReminderViewSheetNavigator()
     
@@ -42,9 +43,25 @@ struct DetailReminderView: View {
                 }
                 
                 Section {
-                    DatePicker(selection: $date, in: Date()..., label: {
-                        Text("Time")
-                    })
+                    HStack {
+                        Image(systemName: "clock.fill")
+                            .font(.title3)
+                            .foregroundColor(.blue)
+                        DatePicker(selection: $date, in: Date()..., label: {
+                            Text("Time")
+                        })
+                    }
+                }
+                
+                Section {
+                    HStack {
+                        Image(systemName: "flag.fill")
+                            .font(.title3)
+                            .foregroundColor(.red)
+                        Toggle(isOn: $isFlagged, label: {
+                            Text("Flag")
+                        })
+                    }
                 }
                 
                 Section {
@@ -111,7 +128,9 @@ struct DetailReminderView: View {
                             date: date,
                             note: note,
                             url: urlInputString.makeUrl(),
-                            image: inputImage)
+                            image: inputImage,
+                            isFlagged: isFlagged
+                            )
                     )
                 } else {
                     viewModel.addNew(
@@ -122,7 +141,9 @@ struct DetailReminderView: View {
                             date: date,
                             note: note,
                             url: urlInputString.makeUrl(),
-                            image: inputImage)
+                            image: inputImage,
+                            isFlagged: isFlagged
+                            )
                     )
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -141,6 +162,7 @@ struct DetailReminderView: View {
                 urlInputString = reminderToUpdate.url?.host ?? ""
                 date = reminderToUpdate.date
                 inputImage = reminderToUpdate.image
+                isFlagged = reminderToUpdate.isFlagged
             } else {
                 name = "New Reminder"
             }
@@ -184,6 +206,6 @@ class DetailReminderViewSheetNavigator: SheetNavigator {
 struct DetailReminderView_Previews: PreviewProvider {
     
     static var previews: some View {
-        return DetailReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Do something", date: Date(), note: "Some kind of note", url: URL(string: "https://www.apple.com")!, image: UIImage()))
+        return DetailReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Do something", date: Date(), note: "Some kind of note", url: URL(string: "https://www.apple.com")!, image: UIImage(), isFlagged: true))
     }
 }

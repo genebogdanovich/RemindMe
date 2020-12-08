@@ -59,28 +59,30 @@ extension ReminderDataManager: DataManager {
     }
     
     func add(_ reminder: Reminder) {
+        
         // First we check if we already have that reminder. If we do, we update it.
-        if let existingReminder = getReminderManagedObject(for: reminder) {
-            existingReminder.date = reminder.date
-            existingReminder.name = reminder.name
-            existingReminder.note = reminder.note
-            existingReminder.url = reminder.url
-            existingReminder.imageData = reminder.image?.jpegData(compressionQuality: 1)
-            dbHelper.update(existingReminder)
+        guard let existingReminder = getReminderManagedObject(for: reminder) else {
+            // If the reminder doesn’t exist, create it!
+            let entity = ReminderManagedObject.entity()
+            let newReminder = ReminderManagedObject(entity: entity, insertInto: dbHelper.context)
+            newReminder.isFlagged = reminder.isFlagged
+            newReminder.id = reminder.id
+            newReminder.name = reminder.name
+            newReminder.date = reminder.date
+            newReminder.note = reminder.note
+            newReminder.url = reminder.url
+            newReminder.isCompleted = reminder.isCompleted
+            newReminder.imageData = reminder.image?.jpegData(compressionQuality: 1)
+            dbHelper.create(newReminder) // All this does is it saves our ManagedObjectContext.
             return
         }
-        
-        // If the reminder doesn’t exist, create it!
-        let entity = ReminderManagedObject.entity()
-        let newReminder = ReminderManagedObject(entity: entity, insertInto: dbHelper.context)
-        newReminder.id = reminder.id
-        newReminder.name = reminder.name
-        newReminder.date = reminder.date
-        newReminder.note = reminder.note
-        newReminder.url = reminder.url
-        newReminder.isCompleted = reminder.isCompleted
-        newReminder.imageData = reminder.image?.jpegData(compressionQuality: 1)
-        dbHelper.create(newReminder) // All this does is it saves our ManagedObjectContext.
+        existingReminder.isFlagged = reminder.isFlagged
+        existingReminder.date = reminder.date
+        existingReminder.name = reminder.name
+        existingReminder.note = reminder.note
+        existingReminder.url = reminder.url
+        existingReminder.imageData = reminder.image?.jpegData(compressionQuality: 1)
+        dbHelper.update(existingReminder)
     }
     
     func toggleIsCompleted(for reminder: Reminder) {

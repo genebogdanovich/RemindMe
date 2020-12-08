@@ -41,6 +41,10 @@ class ReminderViewModel: ObservableObject {
         self.reminder = reminder
     }
     
+    var isFlaggedIcon: Image? {
+        return reminder.isFlagged ? Image(systemName: "flag.circle.fill") : nil
+    }
+    
     var image: Image? {
         if let uiImage = reminder.image {
             return Image(uiImage: uiImage)
@@ -55,6 +59,11 @@ class ReminderViewModel: ObservableObject {
     
     var id: UUID {
         return reminder.id
+    }
+    
+    var isCompletedIcon: Image {
+        return reminder.isCompleted ? Image(systemName: "checkmark.square.fill") : Image(systemName: "square")
+            
     }
     
     var isCompleted: Bool {

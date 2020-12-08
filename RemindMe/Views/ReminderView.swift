@@ -23,7 +23,7 @@ struct ReminderView: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            Image(systemName: reminderViewModel.isCompleted ? "checkmark.square.fill" : "square")
+            reminderViewModel.isCompletedIcon
                 .font(.headline)
                 .foregroundColor(reminderViewModel.isCompleted ? .blue : .secondary)
                 .onTapGesture {
@@ -72,6 +72,14 @@ struct ReminderView: View {
                 .buttonStyle(PlainButtonStyle())
                 
             }
+            
+            Spacer()
+            
+            reminderViewModel.isFlaggedIcon?
+                .foregroundColor(.red)
+                .font(.title3)
+            
+            
         }
         .fullScreenCover(isPresented: $sheetNavigator.showingSheet, onDismiss: {
             reminderListViewModel.fetchReminders()
@@ -163,7 +171,9 @@ struct ReminderView_Previews: PreviewProvider {
                     date: Date(),
                     note: "It helps with problem solving.",
                     url: URL(string: "apple.com"),
-                    image: UIImage())
+                    image: UIImage(),
+                    isFlagged: true
+                    )
             ),
             reminderListViewModel: ReminderListViewModel())
     }

@@ -16,8 +16,9 @@ struct Reminder: Identifiable, Hashable {
     var note: String?
     var url: URL?
     var image: UIImage?
+    var isFlagged: Bool
     
-    init(id: UUID, isCompleted: Bool, name: String, date: Date, note: String?, url: URL?, image: UIImage?) {
+    init(id: UUID, isCompleted: Bool, name: String, date: Date, note: String?, url: URL?, image: UIImage?, isFlagged: Bool) {
         self.id = id
         self.date = date
         self.isCompleted = isCompleted
@@ -25,5 +26,6 @@ struct Reminder: Identifiable, Hashable {
         self.note = note
         self.url = url
         self.image = image
+        self.isFlagged = isFlagged
     }
 }

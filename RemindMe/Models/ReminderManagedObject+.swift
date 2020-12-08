@@ -20,7 +20,9 @@ extension ReminderManagedObject {
                 date: date ?? Date(),
                 note: note,
                 url: url,
-                image: uiImage)
+                image: uiImage,
+                isFlagged: isFlagged
+            )
         } else {
             return Reminder(
                 id: id,
@@ -29,7 +31,9 @@ extension ReminderManagedObject {
                 date: date ?? Date(),
                 note: note,
                 url: url,
-                image: nil)
+                image: nil,
+                isFlagged: isFlagged
+            )
         }
     }
 }
