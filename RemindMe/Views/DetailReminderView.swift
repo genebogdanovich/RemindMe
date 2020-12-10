@@ -12,17 +12,20 @@ struct DetailReminderView: View {
     @Environment(\.presentationMode) private var presentationMode
     
     @State private var showingActionSheet = false
-    
     @State private var name = ""
     @State private var note = ""
     @State private var date = Date()
     @State private var urlInputString = ""
     @State private var inputImage: UIImage?
     @State private var isFlagged: Bool = false
+    @State private var priorityType = "High"
+    
     
     @ObservedObject private var sheetNavigator = DetailReminderViewSheetNavigator()
     
-    var viewModel: DetailReminderViewModel
+    
+    
+    @ObservedObject var viewModel: DetailReminderViewModel
     let reminderToUpdate: Reminder?
 
     var body: some View {
@@ -60,6 +63,19 @@ struct DetailReminderView: View {
                             .foregroundColor(.red)
                         Toggle(isOn: $isFlagged, label: {
                             Text("Flag")
+                        })
+                    }
+                    
+                    HStack {
+                        Image(systemName: "exclamationmark.square.fill")
+                            .font(.title3)
+                            .foregroundColor(.yellow)
+                        
+                        // FIXME: This doesn't work.
+                        Picker("Priority", selection: $priorityType, content: {
+                            ForEach(0..<DetailReminderViewModel.priorityTypes.count, content: { index in
+                                Text(DetailReminderViewModel.priorityTypes[index]).tag(index)
+                            })
                         })
                     }
                 }
@@ -119,6 +135,7 @@ struct DetailReminderView: View {
                 Text("Cancel")
                     .fontWeight(.regular)
             }), trailing: Button(action: {
+                print("Hello: \(priorityType)")
                 if let reminderToUpdate = reminderToUpdate {
                     viewModel.addNew(
                         Reminder(
@@ -129,7 +146,8 @@ struct DetailReminderView: View {
                             note: note,
                             url: urlInputString.makeUrl(),
                             image: inputImage,
-                            isFlagged: isFlagged
+                            isFlagged: isFlagged,
+                            priority: mapTextToReminderPriority(string: priorityType)
                             )
                     )
                 } else {
@@ -142,7 +160,8 @@ struct DetailReminderView: View {
                             note: note,
                             url: urlInputString.makeUrl(),
                             image: inputImage,
-                            isFlagged: isFlagged
+                            isFlagged: isFlagged,
+                            priority: mapTextToReminderPriority(string: priorityType)
                             )
                     )
                 }
@@ -172,6 +191,23 @@ struct DetailReminderView: View {
     init(viewModel: DetailReminderViewModel = DetailReminderViewModel(), reminderToUpdate: Reminder?) {
         self.viewModel = viewModel
         self.reminderToUpdate = reminderToUpdate
+    }
+    
+    // FIXME: Refactor this out.
+    private func mapTextToReminderPriority(string: String) -> ReminderPriority {
+        print("CRASH: \(string)")
+        switch string {
+        case "None":
+            return ReminderPriority.none
+        case "Low":
+            return ReminderPriority.low
+        case "Medium":
+            return ReminderPriority.medium
+        case "High":
+            return ReminderPriority.high
+        default:
+            fatalError()
+        }
     }
 }
 
@@ -206,6 +242,6 @@ class DetailReminderViewSheetNavigator: SheetNavigator {
 struct DetailReminderView_Previews: PreviewProvider {
     
     static var previews: some View {
-        return DetailReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Do something", date: Date(), note: "Some kind of note", url: URL(string: "https://www.apple.com")!, image: UIImage(), isFlagged: true))
+        return DetailReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Do something", date: Date(), note: "Some kind of note", url: URL(string: "https://www.apple.com")!, image: UIImage(), isFlagged: true, priority: .high))
     }
 }

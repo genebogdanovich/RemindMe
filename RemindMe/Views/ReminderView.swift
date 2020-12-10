@@ -172,7 +172,8 @@ struct ReminderView_Previews: PreviewProvider {
                     note: "It helps with problem solving.",
                     url: URL(string: "apple.com"),
                     image: UIImage(),
-                    isFlagged: true
+                    isFlagged: true,
+                    priority: .high
                     )
             ),
             reminderListViewModel: ReminderListViewModel())

@@ -23,6 +23,7 @@ protocol DetailReminderViewModelProtocol {
 final class DetailReminderViewModel: ObservableObject {
     var dataManager: DataManager
 //    var newReminderViewState = NewReminderViewState()
+    static let priorityTypes = ["None", "Low", "Medium", "High"]
     
     init(dataManager: DataManager = ReminderDataManager.shared) {
         self.dataManager = dataManager

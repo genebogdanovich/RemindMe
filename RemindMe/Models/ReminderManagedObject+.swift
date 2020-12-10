@@ -21,7 +21,8 @@ extension ReminderManagedObject {
                 note: note,
                 url: url,
                 image: uiImage,
-                isFlagged: isFlagged
+                isFlagged: isFlagged,
+                priority: .high
             )
         } else {
             return Reminder(
@@ -32,7 +33,8 @@ extension ReminderManagedObject {
                 note: note,
                 url: url,
                 image: nil,
-                isFlagged: isFlagged
+                isFlagged: isFlagged,
+                priority: .high
             )
         }
     }
