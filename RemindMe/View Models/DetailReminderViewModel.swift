@@ -24,6 +24,11 @@ final class DetailReminderViewModel: ObservableObject {
     var dataManager: DataManager
 //    var newReminderViewState = NewReminderViewState()
     static let priorityTypes = ["None", "Low", "Medium", "High"]
+    @Published var priorityType = 0 {
+        didSet {
+            print("didSet priorityType on DetailReminderViewModel to: \(priorityType)")
+        }
+    }
     
     init(dataManager: DataManager = ReminderDataManager.shared) {
         self.dataManager = dataManager

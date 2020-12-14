@@ -11,6 +11,7 @@ import SwiftUI
 struct DetailReminderView: View {
     @Environment(\.presentationMode) private var presentationMode
     
+    // FIXME: How about moving this to ViewModel?
     @State private var showingActionSheet = false
     @State private var name = ""
     @State private var note = ""
@@ -18,7 +19,6 @@ struct DetailReminderView: View {
     @State private var urlInputString = ""
     @State private var inputImage: UIImage?
     @State private var isFlagged: Bool = false
-    @State private var priorityType = "High"
     
     
     @ObservedObject private var sheetNavigator = DetailReminderViewSheetNavigator()
@@ -27,6 +27,8 @@ struct DetailReminderView: View {
     
     @ObservedObject var viewModel: DetailReminderViewModel
     let reminderToUpdate: Reminder?
+    
+    
 
     var body: some View {
         NavigationView {
@@ -66,17 +68,10 @@ struct DetailReminderView: View {
                         })
                     }
                     
-                    HStack {
-                        Image(systemName: "exclamationmark.square.fill")
-                            .font(.title3)
-                            .foregroundColor(.yellow)
-                        
-                        // FIXME: This doesn't work.
-                        Picker("Priority", selection: $priorityType, content: {
-                            ForEach(0..<DetailReminderViewModel.priorityTypes.count, content: { index in
-                                Text(DetailReminderViewModel.priorityTypes[index]).tag(index)
-                            })
-                        })
+                    Picker(selection: $viewModel.priorityType, label: Text("Priority")) {
+                        ForEach(0..<DetailReminderViewModel.priorityTypes.count, id: \.self) {
+                            Text(DetailReminderViewModel.priorityTypes[$0])
+                        }
                     }
                 }
                 
@@ -135,33 +130,35 @@ struct DetailReminderView: View {
                 Text("Cancel")
                     .fontWeight(.regular)
             }), trailing: Button(action: {
-                print("Hello: \(priorityType)")
+                
+                print(viewModel.priorityType)
+                
                 if let reminderToUpdate = reminderToUpdate {
-                    viewModel.addNew(
+                    viewModel.add(
                         Reminder(
                             id: reminderToUpdate.id,
                             isCompleted: reminderToUpdate.isCompleted,
                             name: name,
                             date: date,
                             note: note,
-                            url: urlInputString.makeUrl(),
+                            url: urlInputString.makeURL(),
                             image: inputImage,
                             isFlagged: isFlagged,
-                            priority: mapTextToReminderPriority(string: priorityType)
+                            priority: Int16(viewModel.priorityType)
                             )
                     )
                 } else {
-                    viewModel.addNew(
+                    viewModel.add(
                         Reminder(
                             id: UUID(),
                             isCompleted: false,
                             name: name,
                             date: date,
                             note: note,
-                            url: urlInputString.makeUrl(),
+                            url: urlInputString.makeURL(),
                             image: inputImage,
                             isFlagged: isFlagged,
-                            priority: mapTextToReminderPriority(string: priorityType)
+                            priority: Int16(viewModel.priorityType)
                             )
                     )
                 }
@@ -182,6 +179,7 @@ struct DetailReminderView: View {
                 date = reminderToUpdate.date
                 inputImage = reminderToUpdate.image
                 isFlagged = reminderToUpdate.isFlagged
+                viewModel.priorityType = Int(reminderToUpdate.priority)
             } else {
                 name = "New Reminder"
             }
@@ -192,23 +190,7 @@ struct DetailReminderView: View {
         self.viewModel = viewModel
         self.reminderToUpdate = reminderToUpdate
     }
-    
-    // FIXME: Refactor this out.
-    private func mapTextToReminderPriority(string: String) -> ReminderPriority {
-        print("CRASH: \(string)")
-        switch string {
-        case "None":
-            return ReminderPriority.none
-        case "Low":
-            return ReminderPriority.low
-        case "Medium":
-            return ReminderPriority.medium
-        case "High":
-            return ReminderPriority.high
-        default:
-            fatalError()
-        }
-    }
+
 }
 
 // MARK: - DetailReminderViewSheetNavigator
@@ -242,6 +224,6 @@ class DetailReminderViewSheetNavigator: SheetNavigator {
 struct DetailReminderView_Previews: PreviewProvider {
     
     static var previews: some View {
-        return DetailReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Do something", date: Date(), note: "Some kind of note", url: URL(string: "https://www.apple.com")!, image: UIImage(), isFlagged: true, priority: .high))
+        return DetailReminderView(reminderToUpdate: Reminder(id: UUID(), isCompleted: false, name: "Do something", date: Date(), note: "Some kind of note", url: URL(string: "https://www.apple.com")!, image: UIImage(), isFlagged: true, priority: 0))
     }
 }

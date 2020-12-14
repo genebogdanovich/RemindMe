@@ -33,14 +33,19 @@ struct ReminderView: View {
                 }
             
             VStack(alignment: .leading) {
-                Button(action: {
-                    sheetNavigator.sheetDestination = .detailView(reminderToUpdate: reminderViewModel.reminder)
-                    sheetNavigator.showingSheet = true
-                }, label: {
-                    Text(reminderViewModel.name)
-                        .font(.body)
-                })
-                .buttonStyle(PlainButtonStyle())
+                HStack(spacing: 0) {
+                    Text(reminderViewModel.priorityString)
+                        .foregroundColor(.red)
+                    Button(action: {
+                        sheetNavigator.sheetDestination = .detailView(reminderToUpdate: reminderViewModel.reminder)
+                        sheetNavigator.showingSheet = true
+                    }, label: {
+                        Text(reminderViewModel.name)
+                            .font(.body)
+                    })
+                    .buttonStyle(PlainButtonStyle())
+                }
+                
                 
             
                 Text(reminderViewModel.dateString)
@@ -173,7 +178,7 @@ struct ReminderView_Previews: PreviewProvider {
                     url: URL(string: "apple.com"),
                     image: UIImage(),
                     isFlagged: true,
-                    priority: .high
+                    priority: 0
                     )
             ),
             reminderListViewModel: ReminderListViewModel())

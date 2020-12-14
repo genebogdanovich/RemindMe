@@ -41,6 +41,21 @@ class ReminderViewModel: ObservableObject {
         self.reminder = reminder
     }
     
+    var priorityString: String {
+        switch reminder.priority {
+        case 0:
+            return ""
+        case 1:
+            return "!"
+        case 2:
+            return "!!"
+        case 3:
+            return "!!!"
+        default:
+            return ""
+        }
+    }
+    
     var isFlaggedIcon: Image? {
         return reminder.isFlagged ? Image(systemName: "flag.circle.fill") : nil
     }

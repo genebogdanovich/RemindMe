@@ -17,9 +17,9 @@ struct Reminder: Identifiable, Hashable {
     var url: URL?
     var image: UIImage?
     var isFlagged: Bool
-    var priority: ReminderPriority
+    var priority: Int16
     
-    init(id: UUID, isCompleted: Bool, name: String, date: Date, note: String?, url: URL?, image: UIImage?, isFlagged: Bool, priority: ReminderPriority) {
+    init(id: UUID, isCompleted: Bool, name: String, date: Date, note: String?, url: URL?, image: UIImage?, isFlagged: Bool, priority: Int16) {
         self.id = id
         self.date = date
         self.isCompleted = isCompleted
@@ -32,9 +32,9 @@ struct Reminder: Identifiable, Hashable {
     }
 }
 
-@objc enum ReminderPriority: Int {
-    case none = 0
-    case low = 1
-    case medium = 2
-    case high = 3
-}
+//@objc enum ReminderPriority: Int16 {
+//    case none = 0
+//    case low = 1
+//    case medium = 2
+//    case high = 3
+//}
