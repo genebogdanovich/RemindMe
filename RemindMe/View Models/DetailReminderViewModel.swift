@@ -10,19 +10,14 @@ import Combine
 import UserNotifications
 
 protocol DetailReminderViewModelProtocol {
-    func addNew(_ reminder: Reminder)
+    func add(_ reminder: Reminder)
 }
 
-//struct NewReminderViewState {
-//    var name: String = "New Reminder"
-//    var note: String = ""
-//    var date: Date = Date()
-//    var urlString = ""
-//}
 
-final class DetailReminderViewModel: ObservableObject {
+
+class DetailReminderViewModel: ObservableObject {
     var dataManager: DataManager
-//    var newReminderViewState = NewReminderViewState()
+
     static let priorityTypes = ["None", "Low", "Medium", "High"]
     @Published var priorityType = 0 {
         didSet {
@@ -39,7 +34,7 @@ final class DetailReminderViewModel: ObservableObject {
 // MARK: - NewReminderViewModelProtocol
 
 extension DetailReminderViewModel: DetailReminderViewModelProtocol {
-    func addNew(_ reminder: Reminder) {
+    func add(_ reminder: Reminder) {
         
         // Schedule notification
         

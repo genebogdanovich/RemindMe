@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func makeUrl() -> URL? {
+    func makeURL() -> URL? {
         guard !self.isEmpty else { return nil }
         
         if self.hasPrefix("https://") || self.hasPrefix("http://") {
