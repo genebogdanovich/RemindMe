@@ -82,7 +82,6 @@ class ReminderImageViewerController: UIViewController {
         
         scrollView.minimumZoomScale = minScale
         scrollView.zoomScale = minScale
-        print("zoomScale: \(minScale)")
     }
     
     @objc private func dismissSelf() {

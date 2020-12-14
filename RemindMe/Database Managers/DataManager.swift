@@ -58,6 +58,7 @@ extension ReminderDataManager: DataManager {
         }
     }
     
+    // FIXME: Refactor this method!
     func add(_ reminder: Reminder) {
         
         // First we check if we already have that reminder. If we do, we update it.

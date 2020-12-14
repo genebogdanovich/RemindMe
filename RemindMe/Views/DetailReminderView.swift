@@ -131,37 +131,20 @@ struct DetailReminderView: View {
                     .fontWeight(.regular)
             }), trailing: Button(action: {
                 
-                print(viewModel.priorityType)
+                let reminder = Reminder(
+                    id: reminderToUpdate == nil ? UUID() : reminderToUpdate!.id,
+                    isCompleted: false,
+                    name: name,
+                    date: date,
+                    note: note,
+                    url: urlInputString.makeURL(),
+                    image: inputImage,
+                    isFlagged: isFlagged,
+                    priority: Int16(viewModel.priorityType
+                    ))
                 
-                if let reminderToUpdate = reminderToUpdate {
-                    viewModel.add(
-                        Reminder(
-                            id: reminderToUpdate.id,
-                            isCompleted: reminderToUpdate.isCompleted,
-                            name: name,
-                            date: date,
-                            note: note,
-                            url: urlInputString.makeURL(),
-                            image: inputImage,
-                            isFlagged: isFlagged,
-                            priority: Int16(viewModel.priorityType)
-                            )
-                    )
-                } else {
-                    viewModel.add(
-                        Reminder(
-                            id: UUID(),
-                            isCompleted: false,
-                            name: name,
-                            date: date,
-                            note: note,
-                            url: urlInputString.makeURL(),
-                            image: inputImage,
-                            isFlagged: isFlagged,
-                            priority: Int16(viewModel.priorityType)
-                            )
-                    )
-                }
+                viewModel.add(reminder)
+                
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Done")
@@ -170,19 +153,8 @@ struct DetailReminderView: View {
             .disabled(name.isEmpty)
             )
         }
-        // FIXME: Refactor this.
         .onAppear() {
-            if let reminderToUpdate = reminderToUpdate {
-                name = reminderToUpdate.name
-                note = reminderToUpdate.note ?? ""
-                urlInputString = reminderToUpdate.url?.host ?? ""
-                date = reminderToUpdate.date
-                inputImage = reminderToUpdate.image
-                isFlagged = reminderToUpdate.isFlagged
-                viewModel.priorityType = Int(reminderToUpdate.priority)
-            } else {
-                name = "New Reminder"
-            }
+            updateView(with: reminderToUpdate)
         }
     }
     
@@ -190,7 +162,22 @@ struct DetailReminderView: View {
         self.viewModel = viewModel
         self.reminderToUpdate = reminderToUpdate
     }
-
+    
+    
+    // FIXME: This should be automatic in SwiftUI and Combine era!
+    private func updateView(with reminder: Reminder?) {
+        if let reminder = reminder {
+            name = reminder.name
+            note = reminder.note ?? ""
+            urlInputString = reminder.url?.host ?? ""
+            date = reminder.date
+            inputImage = reminder.image
+            isFlagged = reminder.isFlagged
+            viewModel.priorityType = Int(reminder.priority)
+        } else {
+            name = "New Reminder"
+        }
+    }
 }
 
 // MARK: - DetailReminderViewSheetNavigator
